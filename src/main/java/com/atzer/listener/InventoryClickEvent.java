@@ -1,9 +1,8 @@
-package com.neko.listener;
+package com.atzer.listener;
 
-import com.neko.RPGInventory;
-import com.neko.menu.MenuHolder;
+import com.atzer.RPGInventory;
+import com.atzer.menu.MenuHolder;
 import dev.lone.itemsadder.api.CustomStack;
-import dev.lone.itemsadder.api.FontImages.TexturedInventoryWrapper;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

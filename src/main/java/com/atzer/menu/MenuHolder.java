@@ -1,8 +1,8 @@
-package com.neko.menu;
+package com.atzer.menu;
 
-import com.neko.RPGInventory;
-import com.neko.section.Section;
-import com.neko.section.Step;
+import com.atzer.RPGInventory;
+import com.atzer.section.Section;
+import com.atzer.section.Step;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;

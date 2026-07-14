@@ -1,4 +1,4 @@
-package com.neko;
+package com.atzer;
 
 import org.bukkit.configuration.file.FileConfiguration;
 

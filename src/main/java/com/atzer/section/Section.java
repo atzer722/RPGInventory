@@ -1,7 +1,7 @@
-package com.neko.section;
+package com.atzer.section;
 
-import com.neko.RPGInventory;
-import com.neko.menu.MenuHolder;
+import com.atzer.RPGInventory;
+import com.atzer.menu.MenuHolder;
 import dev.lone.itemsadder.api.CustomStack;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.apache.commons.lang3.tuple.Pair;

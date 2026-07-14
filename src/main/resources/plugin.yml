@@ -1,5 +1,5 @@
 name: RPGInventory
-main: com.neko.RPGInventory
+main: com.atzer.RPGInventory
 version: "1.0-SNAPSHOT"
 api-version: "1.21"
 load: POSTWORLD

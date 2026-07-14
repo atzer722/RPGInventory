@@ -1,7 +1,7 @@
-package com.neko.section;
+package com.atzer.section;
 
-import com.neko.PluginPlayer;
-import com.neko.RPGInventory;
+import com.atzer.PluginPlayer;
+import com.atzer.RPGInventory;
 import dev.lone.itemsadder.api.CustomStack;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.configuration.file.FileConfiguration;

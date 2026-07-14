@@ -1,8 +1,8 @@
-package com.neko.stack;
+package com.atzer.stack;
 
-import com.neko.RPGInventory;
-import com.neko.menu.MenuHolder;
-import com.neko.section.Step;
+import com.atzer.RPGInventory;
+import com.atzer.menu.MenuHolder;
+import com.atzer.section.Step;
 import dev.lone.itemsadder.api.CustomStack;
 import org.bukkit.entity.HumanEntity;
 

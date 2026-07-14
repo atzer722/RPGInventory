@@ -1,12 +1,12 @@
-package com.neko;
+package com.atzer;
 
-import com.neko.command.OpenCommand;
-import com.neko.command.ReloadCommand;
-import com.neko.listener.*;
-import com.neko.menu.MenuHolder;
-import com.neko.section.Section;
-import com.neko.section.Step;
-import com.neko.stack.*;
+import com.atzer.command.OpenCommand;
+import com.atzer.command.ReloadCommand;
+import com.atzer.listener.*;
+import com.atzer.menu.MenuHolder;
+import com.atzer.section.Section;
+import com.atzer.section.Step;
+import com.atzer.stack.*;
 import dev.lone.itemsadder.api.CustomStack;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Bukkit;

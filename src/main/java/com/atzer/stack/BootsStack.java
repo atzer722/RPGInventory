@@ -1,13 +1,12 @@
-package com.neko.stack;
+package com.atzer.stack;
 
-import com.neko.RPGInventory;
-import com.neko.menu.MenuHolder;
+import com.atzer.RPGInventory;
+import com.atzer.menu.MenuHolder;
 import dev.lone.itemsadder.api.CustomStack;
 import org.bukkit.entity.HumanEntity;
 
-public class HelmetStack extends PluginStack {
-
-    public HelmetStack(MenuHolder menuHolder, HumanEntity player, RPGInventory plugin, CustomStack clickedItem) {
+public class BootsStack extends PluginStack {
+    public BootsStack(MenuHolder menuHolder, HumanEntity player, RPGInventory plugin, CustomStack clickedItem) {
         super(menuHolder, player, plugin, clickedItem);
     }
 
@@ -17,7 +16,7 @@ public class HelmetStack extends PluginStack {
         this.getPlugin().openInventory(
                 this.getPlayer(),
                 this.getMenuHolder().getSection(),
-                this.getMenuHolder().getSection().getFromHelmet(this.getClickedItem())
+                this.getMenuHolder().getSection().getFromBoots(this.getClickedItem())
         );
     }
 }

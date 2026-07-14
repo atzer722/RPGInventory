@@ -1,6 +1,6 @@
-package com.neko.command;
+package com.atzer.command;
 
-import com.neko.RPGInventory;
+import com.atzer.RPGInventory;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

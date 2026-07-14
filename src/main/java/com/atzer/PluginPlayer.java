@@ -1,7 +1,7 @@
-package com.neko;
+package com.atzer;
 
-import com.neko.section.Section;
-import com.neko.section.Step;
+import com.atzer.section.Section;
+import com.atzer.section.Step;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.HumanEntity;

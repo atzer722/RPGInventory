@@ -1,6 +1,6 @@
-package com.neko.listener;
+package com.atzer.listener;
 
-import com.neko.RPGInventory;
+import com.atzer.RPGInventory;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 

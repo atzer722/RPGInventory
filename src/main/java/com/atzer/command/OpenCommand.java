@@ -1,6 +1,6 @@
-package com.neko.command;
+package com.atzer.command;
 
-import com.neko.RPGInventory;
+import com.atzer.RPGInventory;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
