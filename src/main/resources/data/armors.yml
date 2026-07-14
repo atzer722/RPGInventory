@@ -4,88 +4,208 @@
   title: Zone 1
   steps:
     1:
-      header: _iainternal:icon_left_blue
-      helmet: _iainternal:icon_right_blue
-      chestplate: _iainternal:icon_search
-      leggings: _iainternal:icon_cancel
-      boots: _iainternal:icon_arrow_chest
+      header:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_1_step_1_header # Must be unique!!! (Useless for header).
+      helmet:
+        id: _iainternal:icon_right_blue
+        permission_id: zone_1_step_1_helmet
+      chestplate:
+        id: _iainternal:icon_search
+        permission_id: zone_1_step_1_chestplate
+      legging:
+        id: _iainternal:icon_cancel
+        permission_id: zone_1_step_1_legging
+      boots:
+        id: _iainternal:icon_arrow_chest
+        permission_id: zone_1_step_1_boots
 
     2:
-      header: _iainternal:icon_left_blue
-      helmet: _iainternal:icon_right_blue
-      chestplate: _iainternal:icon_search
-      leggings: _iainternal:icon_cancel
-      boots: _iainternal:icon_arrow_chest
+      header:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_1_step_2_header
+      helmet:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_1_step_2_hemet
+      chestplate:
+        id: _iainternal:icon_search
+        permission_id: zone_1_step_2_chestplate
+      legging:
+        id: _iainternal:icon_cancel
+        permission_id: zone_id_step_2_legging
+      boots:
+        id: _iainternal:icon_arrow_chest
+        permission_id: zone_1_step_2_boots
 
     3:
-      header: _iainternal:icon_left_blue
-      helmet: _iainternal:icon_right_blue
-      chestplate: _iainternal:icon_search
-      leggings: _iainternal:icon_cancel
-      boots: _iainternal:icon_arrow_chest
+      header:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_1_step_3_header
+      helmet:
+        id: _iainternal:icon_right_blue
+        permission_id: zone_1_step_3_helmet
+      chestplate:
+        id: _iainternal:icon_search
+        permission_id: zone_1_step_3_chestplate
+      legging:
+        id: _iainternal:icon_search
+        permission_id: zone_1_step_3_legging
+      boots:
+        id: _iainternal:icon_arrow_chest
+        permission_id: zone_1_step_3_boots
 
     4:
-      header: _iainternal:icon_left_blue
-      helmet: _iainternal:icon_right_blue
-      chestplate: _iainternal:icon_search
-      leggings: _iainternal:icon_cancel
-      boots: _iainternal:icon_arrow_chest
+      header:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_1_step_4_header
+      helmet:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_1_step_4_helmet
+      chestplate:
+        id: _iainternal:icon_search
+        permission_id: zone_1_step_4_chestplate
+      legging:
+        id: _iainternal:icon_cancel
+        permission_id: zone_1_step_4_legging
+      boots:
+        id: _iainternal:icon_arrow_chest
+        permission_id: zone_1_step_4_boots
 
     5:
-      header: _iainternal:icon_left_blue
-      helmet: _iainternal:icon_right_blue
-      chestplate: _iainternal:icon_search
-      leggings: _iainternal:icon_cancel
-      boots: _iainternal:icon_arrow_chest
+      header:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_1_step_5_header
+      helmet:
+        id: _iainternal:icon_right_blue
+        permission_id: zone_1_step_5_helmet
+      chestplate:
+        id: _iainternal:icon_search
+        permission_id: zone_1_step_5_chestplate
+      legging:
+        id: _iainternal:icon_cancel
+        permission_id: zone_1_step_5_legging
+      boots:
+        id: _iainternal:icon_arrow_chest
+        permission_id: zone_1_step_5_boots
 
     6:
-      header: _iainternal:icon_left_blue
-      helmet: _iainternal:icon_right_blue
-      chestplate: _iainternal:icon_search
-      leggings: _iainternal:icon_cancel
-      boots: _iainternal:icon_arrow_chest
+      header:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_1_step_6_header
+      helmet:
+        id: _iainternal:icon_right_blue
+        permission_id: zone_1_step_6_helmet
+      chestplate:
+        id: _iainternal:icon_search
+        permission_id: zone_1_step_6_chestplate
+      legging:
+        id: _iainternal:icon_cancel
+        permission_id: zone_1_step_6_legging
+      boots:
+        id: _iainternal:icon_arrow_chest
+        permission_id: zone_1_step_6_boots
 
 2:
   title: Zone 2
   steps:
     1:
-      header: _iainternal:icon_left_blue
-      helmet: _iainternal:icon_right_blue
-      chestplate: _iainternal:icon_search
-      leggings: _iainternal:icon_cancel
-      boots: _iainternal:icon_arrow_chest
+      header:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_2_step_1_header
+      helmet:
+        id: _iainternal:icon_right_blue
+        permission_id: zone_2_step_1_helmet
+      chestplate:
+        id: _iainternal:icon_search
+        permission_id: zone_2_step_1_chestplate
+      legging:
+        id: _iainternal:icon_cancel
+        permission_id: zone_2_step_1_legging
+      boots:
+        id: _iainternal:icon_arrow_chest
+        permission_id: zone_2_step_1_boots
 
     2:
-      header: _iainternal:icon_left_blue
-      helmet: _iainternal:icon_right_blue
-      chestplate: _iainternal:icon_search
-      leggings: _iainternal:icon_cancel
-      boots: _iainternal:icon_arrow_chest
+      header:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_2_step_2_header
+      helmet:
+        id: _iainternal:icon_right_blue
+        permission_id: zone_2_step_2_helmet
+      chestplate:
+        id: _iainternal:icon_search
+        permission_id: zone_2_step_2_chestplate
+      legging:
+        id: _iainternal:icon_cancel
+        permission_id: zone_2_step_2_legging
+      boots:
+        id: _iainternal:icon_arrow_chest
+        permission_id: zone_2_step_2_boots
 
     3:
-      header: _iainternal:icon_left_blue
-      helmet: _iainternal:icon_right_blue
-      chestplate: _iainternal:icon_search
-      leggings: _iainternal:icon_cancel
-      boots: _iainternal:icon_arrow_chest
+      header:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_2_step_3_header
+      helmet:
+        id: _iainternal:icon_right_blue
+        permission_id: zone_2_step_3_helmet
+      chestplate:
+        id: _iainternal:icon_search
+        permission_id: zone_2_step_3_chestplate
+      legging:
+        id: _iainternal:icon_cancel
+        permission_id: zone_2_step_3_legging
+      boots:
+        id: _iainternal:icon_arrow_chest
+        permission_id: zone_2_step_3_boots
 
     4:
-      header: _iainternal:icon_left_blue
-      helmet: _iainternal:icon_right_blue
-      chestplate: _iainternal:icon_search
-      leggings: _iainternal:icon_cancel
-      boots: _iainternal:icon_arrow_chest
+      header:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_2_step_4_header
+      helmet:
+        id: _iainternal:icon_right_blue
+        permission_id: zone_2_step_4_helmet
+      chestplate:
+        id: _iainternal:icon_search
+        permission_id: zone_2_step_4_chestplate
+      legging:
+        id: _iainternal:icon_cancel
+        permission_id: zone_2_step_4_legging
+      boots:
+        id: _iainternal:icon_arrow_chest
+        permission_id: zone_2_step_4_boots
 
     5:
-      header: _iainternal:icon_left_blue
-      helmet: _iainternal:icon_right_blue
-      chestplate: _iainternal:icon_search
-      leggings: _iainternal:icon_cancel
-      boots: _iainternal:icon_arrow_chest
+      header:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_2_step_5_header
+      helmet:
+        id: _iainternal:icon_right_blue
+        permission_id: zone_2_step_5_helmet
+      chestplate:
+        id: _iainternal:icon_search
+        permission_id: zone_2_step_5_chesplate
+      legging:
+        id: _iainternal:icon_search
+        permission_id: zone_2_step_5_legging
+      boots:
+        id: _iainternal:icon_arrow_chest
+        permission_id: zone_2_step_5_boots
 
     6:
-      header: _iainternal:icon_left_blue
-      helmet: _iainternal:icon_right_blue
-      chestplate: _iainternal:icon_search
-      leggings: _iainternal:icon_cancel
-      boots: _iainternal:icon_arrow_chest
+      header:
+        id: _iainternal:icon_left_blue
+        permission_id: zone_2_step_6_header
+      helmet:
+        id: _iainternal:icon_right_blue
+        permission_id: zone_2_step_6_helmet
+      chestplate:
+        id: _iainternal:icon_search
+        permission_id: zone_2_step_6_chestplate
+      legging:
+        id: _iainternal:icon_search
+        permission_id: zone_2_step_6_legging
+      boots:
+        id: _iainternal:icon_arrow_chest
+        permission_id: zone_2_step_6_boots
