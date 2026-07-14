@@ -26,4 +26,7 @@ database:
   password: "" # Please give it a good password.
   name: "rpginventory" # The name of your database.
 
+menu:
+  command: "menu" # The command that will be used after the /open command: Ex: /open menu
+
   # Free Palestine, free Congo, free Ouïghour, free Ukraine, free World.

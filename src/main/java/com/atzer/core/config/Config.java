@@ -32,4 +32,8 @@ public final class Config {
     public String getDatabaseName() {
         return get().getString("database.name", "rpginventory");
     }
+
+    public String getMenuCommand() {
+        return get().getString("menu.command", "menu");
+    }
 }
