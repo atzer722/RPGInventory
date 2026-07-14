@@ -22,4 +22,4 @@ right_arrow_button: _iainternal:icon_right_blue
 unlocked_item_button: _iainternal:icon_cancel
 locked_item_button: _iainternal:icon_cancel
 
-undefined_item: icon_cancel
+undefined_item: _iainternal:icon_cancel
