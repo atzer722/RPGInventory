@@ -12,20 +12,6 @@
 
 # For any issues, please open an issue on GitHub (https://github.com/atzer722/RPGInventory) or send a message on Discord (atzer).
 
-# Persistent data managing (database).
-# SQLite is a local file solution that allow us to manage datas without any connections and with a minimal configuration.
-# MySQL and MariaDB are more robust databases systems that allows distant connection, more security and more efficiency. Choose it if you know what you are doing.
-# We prefer MariaDB but if you are not really sure, use sqlite.
-database:
-  motor: "sqlite" # You can use mariadb, mysql or sqlite.
-
-  # If you are using MySQL or MariaDB:
-  host: "127.0.0.1" # The ip adress of the database: 127.0.0.1 or localhost are for local MySQL or local MariaDB.
-  port: 3306 # Default: 3306. Generally 3306 for many databases but it can be different with your DB config.
-  username: "root" # Default: root. root is a superuser. It's not the best option for security. We advise you to add a user with limited permissions on your database.
-  password: "" # Please give it a good password.
-  name: "rpginventory" # The name of your database.
-
 menu:
   command: "menu" # The command that will be used after the /open command: Ex: /open menu
 
