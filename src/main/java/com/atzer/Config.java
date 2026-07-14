@@ -1,55 +1,48 @@
 package com.atzer;
 
+import lombok.NoArgsConstructor;
 import org.bukkit.configuration.file.FileConfiguration;
 
-public enum Config {
+@NoArgsConstructor
+public final class Config {
 
-    ENABLE(true, "enable"),
-    MENUBUTTON("menuIcon", "menu_button"),
-    LEFTARROWBUTTON("leftArrowIcon", "left_arrow_button"),
-    EQUIPBUTTON("equipIcon", "equip_button"),
-    RIGHTARROWBUTTON("rightArrowIcon", "right_arrow_button"),
-    UNLOCKEDITEMBUTTON("unlockedItemIcon", "unlocked_item_button"),
-    LOCKEDITEMBUTTON("lockedItemIcon", "locked_item_button"),
-    UNDEFINEDITEM("undefinedItem", "undefined_item"),
-    MENUCOMMAND("menuCommand", "menu_command");
-
-    private final Object defaultValue;
-    private final String path;
-
-    Config(Object defaultValue, String path) {
-        this.defaultValue = defaultValue;
-        this.path = path;
+    private static FileConfiguration get() {
+        return RPGInventory.getInstance().getConfig();
     }
 
-    public Object getDefaultValue() {
-        return this.defaultValue;
+    public boolean getPLuginEnable() {
+        return get().getBoolean("enable", false);
     }
 
-    public String getPath() {
-        return this.path;
+    public String getMenuCommand() {
+        return get().getString("menu_command", "menu");
     }
 
-    public Object get(FileConfiguration config) {
-        Object result = config.get(this.path);
-
-        if (result == null) {
-            config.set(this.path, this.defaultValue);
-            return this.defaultValue;
-        }
-
-        return result;
+    public String getMenuButton() {
+        return get().getString("menu_button", "_iainternal:icon_next_orange");
     }
 
-    public String getString(FileConfiguration config) {
-        return String.valueOf(this.get(config));
+    public String getLeftArrowButton() {
+        return get().getString("left_arrow_button", "_iainternal:icon_back_orange");
     }
 
-    public int getInt(FileConfiguration config) {
-        return Integer.parseInt(this.getString(config));
+    public String getEquipButton() {
+        return get().getString("equip_button", "_iainternal:icon_next_orange");
     }
 
-    public boolean getBoolean(FileConfiguration config) {
-        return Boolean.parseBoolean(this.getString(config));
+    public String getRightArrowButton() {
+        return get().getString("right_arrow_button", "_iainternal:icon_right_blue");
+    }
+
+    public String getUnlockedItemButton() {
+        return get().getString("unlocked_item_button", "_iainternal:icon_cancel");
+    }
+
+    public String getLOckedItemButton() {
+        return get().getString("locked_item_button", "_iainternal:icon_cancel");
+    }
+
+    public String getUndefinedItem() {
+        return get().getString("undefined_item", "_iainternal:icon_cancel");
     }
 }

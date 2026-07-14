@@ -3,6 +3,7 @@ package com.atzer.listener;
 import com.atzer.RPGInventory;
 import com.atzer.menu.MenuHolder;
 import dev.lone.itemsadder.api.CustomStack;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,13 +11,10 @@ import org.bukkit.event.inventory.InventoryType;
 
 import java.lang.reflect.InvocationTargetException;
 
+@RequiredArgsConstructor
 public class InventoryClickEvent implements Listener {
 
     private final RPGInventory plugin;
-
-    public InventoryClickEvent(RPGInventory plugin) {
-        this.plugin = plugin;
-    }
 
     @EventHandler
     public void onInventoryClick(org.bukkit.event.inventory.InventoryClickEvent event)

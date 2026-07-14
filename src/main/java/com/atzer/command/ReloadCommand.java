@@ -1,6 +1,7 @@
 package com.atzer.command;
 
 import com.atzer.RPGInventory;
+import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,13 +11,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class ReloadCommand implements TabExecutor {
 
     private final RPGInventory plugin;
-
-    public ReloadCommand(RPGInventory plugin) {
-        this.plugin = plugin;
-    }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String @NotNull [] args) {

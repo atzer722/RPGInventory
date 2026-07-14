@@ -3,6 +3,9 @@ package com.atzer.section;
 import com.atzer.RPGInventory;
 import com.atzer.menu.MenuHolder;
 import dev.lone.itemsadder.api.CustomStack;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -15,6 +18,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+@Getter
+@Setter
+@AllArgsConstructor
 public class Section {
 
     private String title;
@@ -26,98 +32,6 @@ public class Section {
     private Step step5;
     private Step step6;
     private Section nextSection;
-
-    public Section(@NotNull String title, int id, @Nullable Step step1, @Nullable Step step2, @Nullable Step step3, @Nullable Step step4, @Nullable Step step5, @Nullable Step step6, @Nullable Section nextSection) {
-        this.title = title;
-        this.id = id;
-        this.step1 = step1;
-        this.step2 = step2;
-        this.step3 = step3;
-        this.step4 = step4;
-        this.step5 = step5;
-        this.step6 = step6;
-        this.nextSection = nextSection;
-    }
-
-    @NotNull
-    public String getTitle() {
-        return this.title;
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    @Nullable
-    public Step getStep1() {
-        return this.step1;
-    }
-
-    @Nullable
-    public Step getStep2() {
-        return this.step2;
-    }
-
-    @Nullable
-    public Step getStep3() {
-        return this.step3;
-    }
-
-    @Nullable
-    public Step getStep4() {
-        return this.step4;
-    }
-
-    @Nullable
-    public Step getStep5() {
-        return this.step5;
-    }
-
-    @Nullable
-    public Step getStep6() {
-        return this.step6;
-    }
-
-    @Nullable
-    public Section getNextSection() {
-        return this.nextSection;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setTitle(@NotNull String title) {
-        this.title = title;
-    }
-
-    public void setStep1(@Nullable Step step1) {
-        this.step1 = step1;
-    }
-
-    public void setStep2(@Nullable Step step2) {
-        this.step2 = step2;
-    }
-
-    public void setStep3(@Nullable Step step3) {
-        this.step3 = step3;
-    }
-
-    public void setStep4(@Nullable Step step4) {
-        this.step4 = step4;
-    }
-
-    public void setStep5(@Nullable Step step5) {
-        this.step5 = step5;
-    }
-
-    public void setStep6(@Nullable Step step6) {
-        this.step6 = step6;
-    }
-
-    public void setNextSection(@Nullable Section nextSection) {
-        this.nextSection = nextSection;
-    }
 
     public static Section loadSection(YamlConfiguration config, Logger LOGGER) {
         return loadSection(1, config, LOGGER);

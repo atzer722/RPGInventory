@@ -1,6 +1,5 @@
 package com.atzer.stack;
 
-import com.atzer.Config;
 import com.atzer.RPGInventory;
 import com.atzer.menu.MenuHolder;
 import dev.lone.itemsadder.api.CustomStack;
@@ -19,6 +18,6 @@ public class MenuStack extends PluginStack {
         this.getPlayer().closeInventory();
         Player player = Bukkit.getPlayer(this.getPlayer().getUniqueId());
         if (player == null) return;
-        player.performCommand(Config.MENUCOMMAND.getString(this.getPlugin().getConfig()));
+        player.performCommand(RPGInventory.getInstance().getConfig().getMenuCommand());
     }
 }

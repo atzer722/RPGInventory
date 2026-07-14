@@ -8,6 +8,8 @@ import com.atzer.section.Section;
 import com.atzer.section.Step;
 import com.atzer.stack.*;
 import dev.lone.itemsadder.api.CustomStack;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -23,32 +25,36 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
-import java.util.logging.Logger;
 
+@Getter
 public class RPGInventory extends JavaPlugin {
 
+    @Getter
     private static RPGInventory instance;
 
+    @Setter
     private Section section;
     private YamlConfiguration sectionConfiguration;
-    private final Logger LOGGER = getLogger();
+    private Config config;
 
     @Override
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
 
+        this.config = new Config();
+
         FileManager.createResourceFile(new File("sections.yml"), this);
 
-        if (!Config.ENABLE.getBoolean(this.getConfig())) {
-            LOGGER.warning("Plugin RPGInventory is disabled in config.yml! The plugin will not be loaded anymore!");
+        if (!this.config.getPLuginEnable()) {
+            this.getLogger().warning("Plugin RPGInventory is disabled in config.yml! The plugin will not be loaded anymore!");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
 
         this.sectionConfiguration = YamlConfiguration.loadConfiguration(new File(this.getDataFolder(), "sections.yml"));
 
-        this.section = Section.loadSection(this.sectionConfiguration, LOGGER);
+        this.section = Section.loadSection(this.sectionConfiguration, this.getLogger());
 
         Objects.requireNonNull(this.getCommand("reload")).setExecutor(new ReloadCommand(this));
         Objects.requireNonNull(this.getCommand("open")).setExecutor(new OpenCommand(this));
@@ -59,61 +65,36 @@ public class RPGInventory extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerSpawnEvent(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this), this);
 
-        LOGGER.info("Plugin RPGInventory enabled!");
+        this.getLogger().info("Plugin RPGInventory enabled!");
     }
 
     @Override
     public void onDisable() {
-        LOGGER.info("Plugin RPGInventory disabled!");
+        this.getLogger().info("Plugin RPGInventory disabled!");
     }
 
-    @NotNull
-    public static RPGInventory getInstance() {
-        return instance;
-    }
-
-    @NotNull
-    public YamlConfiguration getSectionConfiguration() {
-        return this.sectionConfiguration;
-    }
-
-    @NotNull
-    public Section getSection() {
-        return section;
-    }
-
-    @NotNull
     public CustomStack getMenuButton() {
-        return CustomStack.getInstance(Config.MENUBUTTON.getString(this.getConfig()));
+        return CustomStack.getInstance(this.config.getMenuButton());
     }
 
-    @NotNull
     public CustomStack getLeftArrowButton() {
-        return CustomStack.getInstance(Config.LEFTARROWBUTTON.getString(this.getConfig()));
+        return CustomStack.getInstance(this.config.getLeftArrowButton());
     }
 
-    @NotNull
     public CustomStack getEquipButton() {
-        return CustomStack.getInstance(Config.EQUIPBUTTON.getString(this.getConfig()));
+        return CustomStack.getInstance(this.config.getEquipButton());
     }
 
-    @NotNull
     public CustomStack getRightArrowButton() {
-        return CustomStack.getInstance(Config.RIGHTARROWBUTTON.getString(this.getConfig()));
+        return CustomStack.getInstance(this.config.getRightArrowButton());
     }
 
-    @NotNull
     public CustomStack getUnlockedItemButton() {
-        return CustomStack.getInstance(Config.UNLOCKEDITEMBUTTON.getString(this.getConfig()));
+        return CustomStack.getInstance(this.config.getUnlockedItemButton());
     }
 
-    @NotNull
     public CustomStack getLockedItemButton() {
-        return CustomStack.getInstance(Config.LOCKEDITEMBUTTON.getString(this.getConfig()));
-    }
-
-    private void setSection(Section section) {
-        this.section = section;
+        return CustomStack.getInstance(this.config.getLOckedItemButton());
     }
 
     @Nullable
@@ -165,25 +146,21 @@ public class RPGInventory extends JavaPlugin {
         return section1;
     }
 
-    public Logger getLOGGER() {
-        return LOGGER;
-    }
-
     public void reload() {
         this.reloadConfig();
         this.sectionConfiguration = YamlConfiguration.loadConfiguration(new File(this.getDataFolder(), "sections.yml"));
-        this.setSection(Section.loadSection(this.sectionConfiguration, LOGGER));
-        this.LOGGER.info("Plugin RPGInventory reloaded!");
+        this.setSection(Section.loadSection(this.sectionConfiguration, this.getLogger()));
+        this.getLogger().info("Plugin RPGInventory reloaded!");
     }
 
-    public void openInventory(@NotNull HumanEntity player) {
+    public void openInventory(HumanEntity player) {
         this.openInventory(player, this.section, this.section.getBestUnlocked(player));
     }
 
     public void openInventory(@NotNull HumanEntity player, Section section, Step pointedStep) {
         MenuHolder menu = new MenuHolder(this, section, player, pointedStep);
 
-        if (pointedStep == null) LOGGER.warning("Step is null!");
+        if (pointedStep == null) this.getLogger().warning("Step is null!");
 
         player.openInventory(menu.getInventory());
     }

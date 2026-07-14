@@ -1,6 +1,7 @@
 package com.atzer.command;
 
 import com.atzer.RPGInventory;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -10,13 +11,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class OpenCommand implements TabExecutor {
 
     private final RPGInventory plugin;
-
-    public OpenCommand(RPGInventory plugin) {
-        this.plugin = plugin;
-    }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String @NotNull [] args) {

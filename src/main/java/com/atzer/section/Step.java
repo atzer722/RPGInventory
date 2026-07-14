@@ -3,14 +3,19 @@ package com.atzer.section;
 import com.atzer.PluginPlayer;
 import com.atzer.RPGInventory;
 import dev.lone.itemsadder.api.CustomStack;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@Getter
+@Setter
+@AllArgsConstructor
 public class Step {
 
     private CustomStack header;
@@ -18,59 +23,6 @@ public class Step {
     private CustomStack chestplate;
     private CustomStack leggings;
     private CustomStack boots;
-
-    public Step(@NotNull CustomStack header, @NotNull CustomStack helmet, @NotNull CustomStack chestplate, @NotNull CustomStack leggings, @NotNull CustomStack boots) {
-        this.header = header;
-        this.helmet = helmet;
-        this.chestplate = chestplate;
-        this.leggings = leggings;
-        this.boots = boots;
-    }
-
-    @NotNull
-    public CustomStack getHeader() {
-        return this.header;
-    }
-
-    @NotNull
-    public CustomStack getHelmet() {
-        return this.helmet;
-    }
-
-    @NotNull
-    public CustomStack getChestplate() {
-        return this.chestplate;
-    }
-
-    @NotNull
-    public CustomStack getLeggings() {
-        return this.leggings;
-    }
-
-    @NotNull
-    public CustomStack getBoots() {
-        return this.boots;
-    }
-
-    public void setHeader(@NotNull CustomStack header) {
-        this.header = header;
-    }
-
-    public void setHelmet(@NotNull CustomStack helmet) {
-        this.helmet = helmet;
-    }
-
-    public void setChestplate(@NotNull CustomStack chestplate) {
-        this.chestplate = chestplate;
-    }
-
-    public void setLeggings(@NotNull CustomStack leggings) {
-        this.leggings = leggings;
-    }
-
-    public void setBoots(@NotNull CustomStack boots) {
-        this.boots = boots;
-    }
 
     @Nullable
     public static Step loadStep(int sectionId, int stepId, FileConfiguration config) {
