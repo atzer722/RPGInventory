@@ -1,10 +1,10 @@
 package com.atzer.armor;
 
-import java.util.Set;
+import java.util.List;
 
 public record ArmorZone(
         String title,
         int num,
-        Set<Set<ArmorPiece>> armorPieces
+        List<List<ArmorPiece>> armorPieces
 ) {
 }

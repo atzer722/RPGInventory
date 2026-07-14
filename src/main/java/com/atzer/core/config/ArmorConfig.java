@@ -5,6 +5,7 @@ import com.atzer.armor.ArmorType;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -40,8 +41,8 @@ public final class ArmorConfig {
         );
     }
 
-    public Set<ArmorPiece> getArmorPieceByStep(int zoneId, int step) {
-        return Set.of(
+    public List<ArmorPiece> getArmorPieceByStep(int zoneId, int step) {
+        return List.of(
                 new ArmorPiece(
                         ArmorType.HEADER,
                         this.getArmorPieceId(zoneId, step, ArmorType.HEADER),
@@ -70,8 +71,8 @@ public final class ArmorConfig {
         );
     }
 
-    public Set<Set<ArmorPiece>> getArmorPieceByZone(int zoneId) {
-        return Set.of(
+    public List<List<ArmorPiece>> getArmorPieceByZone(int zoneId) {
+        return List.of(
                 this.getArmorPieceByStep(zoneId, 1),
                 this.getArmorPieceByStep(zoneId, 2),
                 this.getArmorPieceByStep(zoneId, 3),

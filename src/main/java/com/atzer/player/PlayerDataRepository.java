@@ -2,6 +2,7 @@ package com.atzer.player;
 
 import com.atzer.PluginRepository;
 import com.atzer.RPGInventory;
+import lombok.NoArgsConstructor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -10,6 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+@NoArgsConstructor
 public class PlayerDataRepository implements PluginRepository<PlayerData, UUID> {
 
     @Override

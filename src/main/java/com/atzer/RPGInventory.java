@@ -3,6 +3,8 @@ package com.atzer;
 import com.atzer.armor.ArmorZoneRegistry;
 import com.atzer.core.config.ArmorConfig;
 import com.atzer.core.config.Config;
+import com.atzer.player.PlayerDataManager;
+import com.atzer.player.PlayerDataRepository;
 import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,6 +20,7 @@ public final class RPGInventory extends JavaPlugin {
     private Config pluginConfig;
     private ArmorConfig armorConfig;
     private ArmorZoneRegistry armorZoneRegistry;
+    private PlayerDataManager playerDataManager;
 
     @Override
     public void onEnable() {
@@ -27,6 +30,8 @@ public final class RPGInventory extends JavaPlugin {
 
         this.armorZoneRegistry = new ArmorZoneRegistry();
         this.armorZoneRegistry.loadRegistry();
+
+        this.playerDataManager = new PlayerDataManager(new PlayerDataRepository());
 
         this.saveDefaultConfig();
 
