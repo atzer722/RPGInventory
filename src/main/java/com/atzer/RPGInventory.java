@@ -3,6 +3,7 @@ package com.atzer;
 import com.atzer.armor.ArmorZoneRegistry;
 import com.atzer.core.config.ArmorConfig;
 import com.atzer.core.config.Config;
+import com.atzer.player.PlayerJoinListener;
 import com.atzer.player.PlayerDataManager;
 import com.atzer.player.PlayerDataRepository;
 import lombok.Getter;
@@ -54,6 +55,8 @@ public final class RPGInventory extends JavaPlugin {
                 playerDataManager.playerPermissionChangeEventHandler(player);
             }, 1L);
         });
+
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
 
         this.getLogger().info("Plugin RPGInventory enabled!");
     }
