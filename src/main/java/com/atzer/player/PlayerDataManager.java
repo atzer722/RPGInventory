@@ -7,15 +7,25 @@ import com.atzer.armor.ArmorZone;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.*;
 
 @RequiredArgsConstructor
 public class PlayerDataManager {
 
     private final PlayerDataRepository playerDataRepository;
+
+    public @Nullable PlayerData getPlayerData(Player player) {
+        Optional<PlayerData> playerData = this.playerDataRepository.findById(player.getUniqueId());
+
+        if (playerData.isEmpty()) {
+            RPGInventory.getInstance().getErrorHandler().handleNoPlayerDataError(player);
+            return null;
+        }
+
+        return playerData.get();
+    }
 
     public void playerJoinEventHandler(Player player) {
         if (this.playerDataRepository.findById(player.getUniqueId()).isEmpty()) {
@@ -34,6 +44,15 @@ public class PlayerDataManager {
     // Quand LuckPerms modifie les permissions (NodeMutateEvent)
     public void playerPermissionChangeEventHandler(Player player) {
         this.applyBestArmor(player); // pas besoin de toucher PlayerData, la zone ne change pas
+    }
+
+    public @Nullable ArmorPiece getHighestUnlockedTier(Player player, ArmorType type, ArmorZone zone) {
+        ArmorPiece highest = null;
+        for (ArmorPiece piece : zone.getPiecesOfType(type)) {
+            if (player.hasPermission(piece.permission())) highest = piece;
+            else return highest;
+        }
+        return highest;
     }
 
     private void applyBestArmor(Player player) {

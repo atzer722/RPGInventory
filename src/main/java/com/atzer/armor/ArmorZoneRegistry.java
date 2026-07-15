@@ -31,6 +31,10 @@ public class ArmorZoneRegistry {
         return null;
     }
 
+    public int getMaxZoneId() {
+        return this.zones.size();
+    }
+
     public ArmorPiece getArmorPieceFromPermissionId(String id) {
         for (ArmorZone zone : zones) {
             for (List<ArmorPiece> armors : zone.armorPieces()) {
@@ -42,22 +46,6 @@ public class ArmorZoneRegistry {
             }
         }
         return null;
-    }
-
-    public int getHighestUnlockedTier(Player player, ArmorType type) {
-        int highest = 0;
-        for (ArmorZone zone : zones) {
-            for (List<ArmorPiece> tierList : zone.armorPieces()) {
-                for (ArmorPiece piece : tierList) {
-                    if (piece.type() == type && player.hasPermission(piece.permission())) {
-                        // On suppose que l'index dans armorPieces() = palier - 1
-                        int tier = zone.armorPieces().indexOf(tierList) + 1;
-                        if (tier > highest) highest = tier;
-                    }
-                }
-            }
-        }
-        return highest;
     }
 
     public ArmorPiece getArmorPieceAtTier(Player player, ArmorType type, int tier) {

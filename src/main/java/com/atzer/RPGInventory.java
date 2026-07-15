@@ -1,8 +1,10 @@
 package com.atzer;
 
 import com.atzer.armor.ArmorZoneRegistry;
+import com.atzer.core.ItemStackUtils;
 import com.atzer.core.config.ArmorConfig;
 import com.atzer.core.config.Config;
+import com.atzer.core.error.ErrorHandler;
 import com.atzer.player.listener.PlayerJoinListener;
 import com.atzer.player.PlayerDataManager;
 import com.atzer.player.PlayerDataRepository;
@@ -29,6 +31,8 @@ public final class RPGInventory extends JavaPlugin {
     private ArmorZoneRegistry armorZoneRegistry;
     private PlayerDataManager playerDataManager;
     private LuckPerms luckPermsApi;
+    private ItemStackUtils itemStackUtils;
+    private ErrorHandler errorHandler;
 
     @Override
     public void onEnable() {
@@ -40,6 +44,10 @@ public final class RPGInventory extends JavaPlugin {
         this.armorZoneRegistry.loadRegistry();
 
         this.playerDataManager = new PlayerDataManager(new PlayerDataRepository());
+
+        this.itemStackUtils = new ItemStackUtils();
+
+        this.errorHandler = new ErrorHandler();
 
         this.saveDefaultConfig();
 
