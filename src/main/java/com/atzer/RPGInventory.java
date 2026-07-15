@@ -8,6 +8,7 @@ import com.atzer.core.error.ErrorHandler;
 import com.atzer.player.listener.PlayerJoinListener;
 import com.atzer.player.PlayerDataManager;
 import com.atzer.player.PlayerDataRepository;
+import com.atzer.reload.command.ReloadCommand;
 import lombok.Getter;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
@@ -19,6 +20,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.Objects;
 
 @Getter
 public final class RPGInventory extends JavaPlugin {
@@ -64,6 +66,7 @@ public final class RPGInventory extends JavaPlugin {
             }, 1L);
         });
 
+        Objects.requireNonNull(this.getCommand("reload")).setExecutor(new ReloadCommand());
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
 
         this.getLogger().info("Plugin RPGInventory enabled!");
