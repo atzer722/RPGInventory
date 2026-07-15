@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 @RequiredArgsConstructor
-public class PlayerDataManager {
+public final class PlayerDataManager {
 
     private final PlayerDataRepository playerDataRepository;
 

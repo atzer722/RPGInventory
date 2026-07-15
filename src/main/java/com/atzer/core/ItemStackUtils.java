@@ -3,10 +3,12 @@ package com.atzer.core;
 import dev.lone.itemsadder.api.CustomStack;
 import lombok.NoArgsConstructor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 @NoArgsConstructor
-public class ItemStackUtils {
+public final class ItemStackUtils {
 
     public ItemStack stringToItemStack(String s) {
         if (s.startsWith("minecraft:")) {
@@ -23,5 +25,15 @@ public class ItemStackUtils {
             return CustomStack.getInstance(s).getItemStack();
         }
         return null;
+    }
+
+    public void addPersistentDataString(ItemStack item, NamespacedKey key, String data) {
+        item.editPersistentDataContainer(pdc -> {
+            pdc.set(key, PersistentDataType.STRING, data);
+        });
+    }
+
+    public String getPersistentDataString(ItemStack item, NamespacedKey key) {
+        return item.getPersistentDataContainer().get(key, PersistentDataType.STRING);
     }
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class ArmorZoneRegistry {
+public final class ArmorZoneRegistry {
 
     private final List<ArmorZone> zones = new ArrayList<>();
 

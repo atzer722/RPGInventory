@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @NoArgsConstructor
-public class PlayerDataRepository implements PluginRepository<PlayerData, UUID> {
+public final class PlayerDataRepository implements PluginRepository<PlayerData, UUID> {
 
     @Override
     public PlayerData save(PlayerData obj) {

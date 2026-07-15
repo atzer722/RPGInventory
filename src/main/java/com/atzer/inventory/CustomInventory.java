@@ -13,7 +13,7 @@ import org.bukkit.inventory.InventoryHolder;
 import java.util.List;
 
 @Getter
-public class CustomInventory implements InventoryHolder {
+public final class CustomInventory implements InventoryHolder {
 
     private final Inventory inventory;
     private final ArmorZone armorZone;
