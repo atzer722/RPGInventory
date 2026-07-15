@@ -1,4 +1,4 @@
-package com.atzer.player;
+package com.atzer.player.listener;
 
 import com.atzer.RPGInventory;
 import org.bukkit.event.EventHandler;

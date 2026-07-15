@@ -3,7 +3,7 @@ package com.atzer;
 import com.atzer.armor.ArmorZoneRegistry;
 import com.atzer.core.config.ArmorConfig;
 import com.atzer.core.config.Config;
-import com.atzer.player.PlayerJoinListener;
+import com.atzer.player.listener.PlayerJoinListener;
 import com.atzer.player.PlayerDataManager;
 import com.atzer.player.PlayerDataRepository;
 import lombok.Getter;
