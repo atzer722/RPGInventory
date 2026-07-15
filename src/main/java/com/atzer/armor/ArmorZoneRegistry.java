@@ -24,7 +24,7 @@ public class ArmorZoneRegistry {
         }
     }
 
-    public ArmorZone getZone(int zoneId) {
+    public ArmorZone getZoneById(int zoneId) {
         for (ArmorZone zone : zones) {
             if (zone.num() == zoneId) return zone;
         }

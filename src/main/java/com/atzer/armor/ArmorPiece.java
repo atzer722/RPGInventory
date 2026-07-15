@@ -5,7 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-public record ArmorPiece(ArmorType type, String itemId, String permission) {
+public record ArmorPiece(ArmorType type, String itemId, String permission, int tier) {
 
     public @Nullable ItemStack toItemStack() {
         if (this.itemId.startsWith("minecraft:")) {

@@ -46,27 +46,32 @@ public final class ArmorConfig {
                 new ArmorPiece(
                         ArmorType.HEADER,
                         this.getArmorPieceId(zoneId, step, ArmorType.HEADER),
-                        this.getArmorPiecePermissionId(zoneId, step, ArmorType.HEADER)
+                        this.getArmorPiecePermissionId(zoneId, step, ArmorType.HEADER),
+                        step
                 ),
                 new ArmorPiece(
                         ArmorType.HELMET,
                         this.getArmorPieceId(zoneId, step, ArmorType.HELMET),
-                        this.getArmorPiecePermissionId(zoneId, step, ArmorType.HELMET)
+                        this.getArmorPiecePermissionId(zoneId, step, ArmorType.HELMET),
+                        step
                 ),
                 new ArmorPiece(
                         ArmorType.CHESTPLATE,
                         this.getArmorPieceId(zoneId, step, ArmorType.CHESTPLATE),
-                        this.getArmorPiecePermissionId(zoneId, step, ArmorType.CHESTPLATE)
+                        this.getArmorPiecePermissionId(zoneId, step, ArmorType.CHESTPLATE),
+                        step
                 ),
                 new ArmorPiece(
                         ArmorType.LEGGING,
                         this.getArmorPieceId(zoneId, step, ArmorType.LEGGING),
-                        this.getArmorPiecePermissionId(zoneId, step, ArmorType.LEGGING)
+                        this.getArmorPiecePermissionId(zoneId, step, ArmorType.LEGGING),
+                        step
                 ),
                 new ArmorPiece(
                         ArmorType.BOOTS,
                         this.getArmorPieceId(zoneId, step, ArmorType.BOOTS),
-                        this.getArmorPiecePermissionId(zoneId, step, ArmorType.BOOTS)
+                        this.getArmorPiecePermissionId(zoneId, step, ArmorType.BOOTS),
+                        step
                 )
         );
     }

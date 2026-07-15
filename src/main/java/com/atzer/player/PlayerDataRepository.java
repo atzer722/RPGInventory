@@ -24,10 +24,7 @@ public class PlayerDataRepository implements PluginRepository<PlayerData, UUID> 
             return this.getPlayerDataFromYaml(obj.uuid(), yamlConfiguration);
         }
 
-        yamlConfiguration.set("equipped_helmet_permission_id", obj.equippedHelmetPermissionId());
-        yamlConfiguration.set("equipped_chestplate_permission_id", obj.equippedChestplatePermissionId());
-        yamlConfiguration.set("equipped_legging_permission_id", obj.equippedLeggingPermissionId());
-        yamlConfiguration.set("equipped_boots_permission_id", obj.equippedBootsPermissionId());
+        yamlConfiguration.set("armor_zone_id", obj.armorZoneId());
         try {
             yamlConfiguration.save(file);
         } catch (IOException e) {
@@ -63,20 +60,8 @@ public class PlayerDataRepository implements PluginRepository<PlayerData, UUID> 
         File file = new File(RPGInventory.getInstance().getDataFolder() + "/data/" + obj.uuid().toString());
         YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(file);
 
-        if (!Objects.equals(playerInData.get().equippedHelmetPermissionId(), obj.equippedHelmetPermissionId())) {
-            yamlConfiguration.set("equipped_helmet_permission_id", obj.equippedHelmetPermissionId());
-        }
-
-        if (!Objects.equals(playerInData.get().equippedChestplatePermissionId(), obj.equippedChestplatePermissionId())) {
-            yamlConfiguration.set("equipped_chestplate_permission_id", obj.equippedChestplatePermissionId());
-        }
-
-        if (!Objects.equals(playerInData.get().equippedLeggingPermissionId(), obj.equippedLeggingPermissionId())) {
-            yamlConfiguration.set("equipped_legging_permission_id", obj.equippedLeggingPermissionId());
-        }
-
-        if (!Objects.equals(playerInData.get().equippedBootsPermissionId(), obj.equippedBootsPermissionId())) {
-            yamlConfiguration.set("equipped_legging_permission_id", obj.equippedBootsPermissionId());
+        if (!Objects.equals(playerInData.get().armorZoneId(), obj.armorZoneId())) {
+            yamlConfiguration.set("armor_zone_id", obj.armorZoneId());
         }
 
         try {
@@ -92,10 +77,7 @@ public class PlayerDataRepository implements PluginRepository<PlayerData, UUID> 
     private PlayerData getPlayerDataFromYaml(UUID uuid, YamlConfiguration yaml) {
         return new PlayerData(
                 uuid,
-                yaml.getString("equipped_helmet_permission_id"),
-                yaml.getString("equipped_chestplate_permission_id"),
-                yaml.getString("equipped_legging_permission_id"),
-                yaml.getString("equipped_boots_permission_id")
+                yaml.getInt("armor_zone_id", 1)
         );
     }
 }
