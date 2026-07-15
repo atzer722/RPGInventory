@@ -2,6 +2,7 @@ package com.atzer.armor;
 
 import com.atzer.RPGInventory;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,34 @@ public class ArmorZoneRegistry {
                     if (armorPiece.permission().equals(id)) {
                         return armorPiece;
                     }
+                }
+            }
+        }
+        return null;
+    }
+
+    public int getHighestUnlockedTier(Player player, ArmorType type) {
+        int highest = 0;
+        for (ArmorZone zone : zones) {
+            for (List<ArmorPiece> tierList : zone.armorPieces()) {
+                for (ArmorPiece piece : tierList) {
+                    if (piece.type() == type && player.hasPermission(piece.permission())) {
+                        // On suppose que l'index dans armorPieces() = palier - 1
+                        int tier = zone.armorPieces().indexOf(tierList) + 1;
+                        if (tier > highest) highest = tier;
+                    }
+                }
+            }
+        }
+        return highest;
+    }
+
+    public ArmorPiece getArmorPieceAtTier(Player player, ArmorType type, int tier) {
+        for (ArmorZone zone : zones) {
+            if (tier - 1 < zone.armorPieces().size()) {
+                List<ArmorPiece> tierList = zone.armorPieces().get(tier - 1);
+                for (ArmorPiece piece : tierList) {
+                    if (piece.type() == type) return piece;
                 }
             }
         }
