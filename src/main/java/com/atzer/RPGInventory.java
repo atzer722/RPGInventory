@@ -1,11 +1,12 @@
 package com.atzer;
 
 import com.atzer.armor.ArmorZoneRegistry;
-import com.atzer.core.ItemStackUtils;
+import com.atzer.core.item.ItemStackUtils;
 import com.atzer.core.config.ArmorConfig;
 import com.atzer.core.config.Config;
 import com.atzer.core.error.ErrorHandler;
 import com.atzer.inventory.command.RPGInventoryCommand;
+import com.atzer.inventory.listener.InventoryClickListener;
 import com.atzer.player.listener.PlayerJoinListener;
 import com.atzer.player.PlayerDataManager;
 import com.atzer.player.PlayerDataRepository;
@@ -41,6 +42,7 @@ public final class RPGInventory extends JavaPlugin {
     public void onEnable() {
         instance = this;
         this.pluginConfig = new Config();
+        this.saveResource("armors.yml", false);
         this.armorConfig = new ArmorConfig(YamlConfiguration.loadConfiguration(new File(this.getDataFolder() + "/armors.yml")));
 
         this.armorZoneRegistry = new ArmorZoneRegistry();
@@ -69,7 +71,8 @@ public final class RPGInventory extends JavaPlugin {
 
         Objects.requireNonNull(this.getCommand("inventory")).setExecutor(new RPGInventoryCommand());
         Objects.requireNonNull(this.getCommand("reload")).setExecutor(new ReloadCommand());
-        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        this.getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
 
         this.getLogger().info("Plugin RPGInventory enabled!");
     }

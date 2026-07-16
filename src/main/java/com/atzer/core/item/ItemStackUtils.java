@@ -1,4 +1,4 @@
-package com.atzer.core;
+package com.atzer.core.item;
 
 import dev.lone.itemsadder.api.CustomStack;
 import lombok.NoArgsConstructor;
@@ -24,7 +24,7 @@ public final class ItemStackUtils {
         if (CustomStack.isInRegistry(s)) {
             return CustomStack.getInstance(s).getItemStack();
         }
-        return null;
+        throw new IllegalArgumentException("The item " + s + " is not a valid item!");
     }
 
     public void addPersistentDataString(ItemStack item, NamespacedKey key, String data) {

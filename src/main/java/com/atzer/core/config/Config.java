@@ -1,6 +1,7 @@
 package com.atzer.core.config;
 
 import com.atzer.RPGInventory;
+import com.atzer.core.item.NamespacedKeysEnum;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
@@ -15,26 +16,48 @@ public final class Config {
     }
 
     public ItemStack getMenuBackButton() {
-        return RPGInventory.getInstance().getItemStackUtils().stringToItemStack(get().getString("menu.back_button", "minecraft:cobblestone"));
+        return this.getConfigItem("menu.back_button", "minecraft:cobblestone", InteractionType.MENU_BACK_BUTTON);
     }
 
     public ItemStack getMenuLeftArrowButton() {
-        return RPGInventory.getInstance().getItemStackUtils().stringToItemStack(get().getString("menu.left_arrow_button", "minecraft:acacia_boat"));
+        return this.getConfigItem("menu.left_arrow_button", "minecraft:acacia_boat", InteractionType.MENU_LEFT_ARROW_BUTTON);
     }
 
     public ItemStack getMenuNotEquippedButton() {
-        return RPGInventory.getInstance().getItemStackUtils().stringToItemStack(get().getString("menu.not_equipped_button", "minecraft:grey_dye"));
+        return this.getConfigItem("menu.not_equipped_button", "minecraft:grey_dye", InteractionType.MENU_NOT_EQUIPPED_BUTTON);
     }
 
     public ItemStack getMenuEquippedButton() {
-        return RPGInventory.getInstance().getItemStackUtils().stringToItemStack(get().getString("menu.equipped_button", "minecraft:green_dye"));
+        return this.getConfigItem("menu.equipped_button", "minecraft:green_dye", InteractionType.MENU_EQUIPPED_BUTTON);
     }
 
     public ItemStack getMenuRightArrowButton() {
-        return RPGInventory.getInstance().getItemStackUtils().stringToItemStack(get().getString("menu.right_arrow_button", "minecraft:oak_boat"));
+        return this.getConfigItem("menu.right_arrow_button", "minecraft:oak_boat", InteractionType.MENU_RIGHT_ARROW_BUTTON);
     }
 
     public ItemStack getMenuHiddenArmorIcon() {
-        return RPGInventory.getInstance().getItemStackUtils().stringToItemStack(get().getString("menu.hidden_armor_icon", "minecraft:bedrock"));
+        return this.getConfigItem("menu.hidden_armor_icon", "minecraft:bedrock", InteractionType.MENU_HIDDEN_ARMOR_BUTTON);
+    }
+
+    private ItemStack getConfigItem(String path, String defaultValue, InteractionType type) {
+        ItemStack item = RPGInventory.getInstance().getItemStackUtils().stringToItemStack(get().getString(path, defaultValue));
+        RPGInventory.getInstance().getItemStackUtils().addPersistentDataString(item, NamespacedKeysEnum.CONFIG_TYPE.getNamespacedKey(), type.name());
+        return item;
+    }
+
+    public enum InteractionType {
+        MENU_BACK_BUTTON,
+        MENU_LEFT_ARROW_BUTTON,
+        MENU_NOT_EQUIPPED_BUTTON,
+        MENU_EQUIPPED_BUTTON,
+        MENU_RIGHT_ARROW_BUTTON,
+        MENU_HIDDEN_ARMOR_BUTTON;
+
+        public static InteractionType getMatch(String name) {
+            for (InteractionType v : values()) {
+                if (v.name().equalsIgnoreCase(name)) return v;
+            }
+            return null;
+        }
     }
 }

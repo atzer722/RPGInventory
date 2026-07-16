@@ -1,11 +1,9 @@
 package com.atzer.armor;
 
 import com.atzer.RPGInventory;
+import com.atzer.core.item.NamespacedKeysEnum;
 import dev.lone.itemsadder.api.CustomStack;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,16 +31,5 @@ public record ArmorPiece(ArmorType type, String itemId, String permission, int t
         RPGInventory.getInstance().getItemStackUtils().addPersistentDataString(item, NamespacedKeysEnum.PERMISSION.getNamespacedKey(), this.permission);
         RPGInventory.getInstance().getItemStackUtils().addPersistentDataString(item, NamespacedKeysEnum.TIER.getNamespacedKey(), String.valueOf(this.tier));
         return item;
-    }
-
-    @RequiredArgsConstructor
-    public enum NamespacedKeysEnum {
-        TYPE(new NamespacedKey(RPGInventory.getInstance(), "type")),
-        ITEM_ID(new NamespacedKey(RPGInventory.getInstance(), "item_id")),
-        PERMISSION(new NamespacedKey(RPGInventory.getInstance(), "permission")),
-        TIER(new NamespacedKey(RPGInventory.getInstance(), "tier"));
-
-        @Getter
-        private final NamespacedKey namespacedKey;
     }
 }
