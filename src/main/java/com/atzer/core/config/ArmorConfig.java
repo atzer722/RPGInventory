@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -20,10 +19,6 @@ public final class ArmorConfig {
 
     public Set<String> getZoneList() {
         return get().getKeys(false);
-    }
-
-    public Set<String> getStepList(int zoneId) {
-        return Objects.requireNonNull(get().getConfigurationSection(zoneId + ".steps")).getKeys(false);
     }
 
     public String getZoneTitle(int zoneId) {

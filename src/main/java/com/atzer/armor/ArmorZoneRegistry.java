@@ -2,7 +2,6 @@ package com.atzer.armor;
 
 import com.atzer.RPGInventory;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,18 +41,6 @@ public final class ArmorZoneRegistry {
                     if (armorPiece.permission().equals(id)) {
                         return armorPiece;
                     }
-                }
-            }
-        }
-        return null;
-    }
-
-    public ArmorPiece getArmorPieceAtTier(Player player, ArmorType type, int tier) {
-        for (ArmorZone zone : zones) {
-            if (tier - 1 < zone.armorPieces().size()) {
-                List<ArmorPiece> tierList = zone.armorPieces().get(tier - 1);
-                for (ArmorPiece piece : tierList) {
-                    if (piece.type() == type) return piece;
                 }
             }
         }
