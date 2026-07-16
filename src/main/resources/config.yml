@@ -13,7 +13,7 @@
 # For any issues, please open an issue on GitHub (https://github.com/atzer722/RPGInventory) or send a message on Discord (atzer).
 
 menu:
-  command: "menu" # The command that will be used after the /open command: Ex: /open menu
+  command: "menu" # The command that will be used to open your menu.
   back_button: "minecraft:cobblestone"
   left_arrow_button: "minecraft:acacia_boat"
   not_equipped_button: "minecraft:grey_dye"

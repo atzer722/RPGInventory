@@ -2,6 +2,7 @@ package com.atzer.core.error;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public final class ErrorHandler {
@@ -12,5 +13,10 @@ public final class ErrorHandler {
                 .color(NamedTextColor.RED)
         );
         throw new NullPointerException("An error occurred while trying to get datas of " + player.getName());
+    }
+
+    public boolean handleMustBeAPlayerToPerformCommandError(CommandSender sender) {
+        sender.sendMessage(Component.text("You must be a player to perform this command!").color(NamedTextColor.RED));
+        return false;
     }
 }

@@ -5,6 +5,7 @@ import com.atzer.core.ItemStackUtils;
 import com.atzer.core.config.ArmorConfig;
 import com.atzer.core.config.Config;
 import com.atzer.core.error.ErrorHandler;
+import com.atzer.inventory.command.RPGInventoryCommand;
 import com.atzer.player.listener.PlayerJoinListener;
 import com.atzer.player.PlayerDataManager;
 import com.atzer.player.PlayerDataRepository;
@@ -66,6 +67,7 @@ public final class RPGInventory extends JavaPlugin {
             }, 1L);
         });
 
+        Objects.requireNonNull(this.getCommand("inventory")).setExecutor(new RPGInventoryCommand());
         Objects.requireNonNull(this.getCommand("reload")).setExecutor(new ReloadCommand());
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
 

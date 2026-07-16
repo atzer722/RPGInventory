@@ -9,6 +9,7 @@ import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.InventoryView;
 
 import java.util.List;
 
@@ -21,6 +22,10 @@ public final class CustomInventory implements InventoryHolder {
     public CustomInventory(RPGInventory plugin, ArmorZone armorZone) {
         this.inventory = plugin.getServer().createInventory(this, 54);
         this.armorZone = armorZone;
+    }
+
+    public static InventoryView openInventory(Player player, ArmorZone zone) {
+        return player.openInventory(new CustomInventory(RPGInventory.getInstance(), zone).getInventory());
     }
 
     public void setArmorZoneItems(Player player) {

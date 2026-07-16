@@ -9,6 +9,15 @@ description: "This plugin transform the main inventory into a rpg inventory."
 depend: [ItemsAdder]
 
 commands:
+  inventory:
+    description: "Open the RPG inventory."
+    permission: rpginventory.inventory
+    permission-message: "You need to have the rpginventory.inventory permission to use this command."
+    aliases:
+      - inv
+      - rpginventory
+      - ri
+
   reload:
     description: "Reload the plugin."
     permission: rpginventory.reload
