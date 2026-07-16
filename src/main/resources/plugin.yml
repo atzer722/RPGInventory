@@ -6,7 +6,7 @@ load: POSTWORLD
 prefix: RPGInventory
 author: Atzer
 description: "This plugin transform the main inventory into a rpg inventory."
-depend: [ItemsAdder, LuckPerms]
+depend: [ItemsAdder, LuckPerms, MMOItems]
 
 commands:
   inventory:

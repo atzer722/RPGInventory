@@ -2,6 +2,7 @@ package com.atzer.core.item;
 
 import dev.lone.itemsadder.api.CustomStack;
 import lombok.NoArgsConstructor;
+import net.Indyuce.mmoitems.MMOItems;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -24,6 +25,12 @@ public final class ItemStackUtils {
         if (CustomStack.isInRegistry(s)) {
             return CustomStack.getInstance(s).getItemStack();
         }
+
+        String[] sArray = s.split(":");
+        if (sArray.length == 2) {
+            return MMOItems.plugin.getItem(sArray[0], sArray[1]);
+        }
+
         throw new IllegalArgumentException("The item " + s + " is not a valid item!");
     }
 
