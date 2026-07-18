@@ -9,6 +9,7 @@ import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
@@ -24,7 +25,9 @@ public final class CustomInventory implements InventoryHolder {
     }
 
     public static void openInventory(Player player, ArmorZone zone) {
-        player.openInventory(new CustomInventory(RPGInventory.getInstance(), zone).getInventory());
+        CustomInventory inv = new CustomInventory(RPGInventory.getInstance(), zone);
+        inv.setArmorZoneItems(player);
+        player.openInventory(inv.getInventory());
     }
 
     public void setArmorZoneItems(Player player) {
@@ -94,49 +97,20 @@ public final class CustomInventory implements InventoryHolder {
     }
 
     private void setLastLine(List<ArmorPiece> pieces, ArmorPiece highestPiece, int firstId) {
-        int highestTier = 0;
+        int highestTier = (highestPiece != null) ? highestPiece.tier() : 0;
 
         if (highestPiece == null) {
-            this.inventory.setItem(firstId+1, RPGInventory.getInstance().getPluginConfig().getMenuHiddenArmorIcon());
+            this.inventory.setItem(firstId + 1, RPGInventory.getInstance().getPluginConfig().getMenuHiddenArmorIcon());
         } else {
-            this.inventory.setItem(firstId+1, highestPiece.toItemStack());
-            highestTier = highestPiece.tier();
+            this.inventory.setItem(firstId + 1, highestPiece.toItemStack());
         }
 
-        if (pieces.getFirst().tier() > highestTier) {
-            this.inventory.setItem(firstId+3, RPGInventory.getInstance().getPluginConfig().getMenuHiddenArmorIcon());
-        } else {
-            this.inventory.setItem(firstId+3, pieces.getFirst().toItemStack());
-        }
-
-        if (pieces.get(1).tier() > highestTier) {
-            this.inventory.setItem(firstId+4, RPGInventory.getInstance().getPluginConfig().getMenuHiddenArmorIcon());
-        } else {
-            this.inventory.setItem(firstId+4, pieces.get(1).toItemStack());
-        }
-
-        if (pieces.get(2).tier() > highestTier) {
-            this.inventory.setItem(firstId+5, RPGInventory.getInstance().getPluginConfig().getMenuHiddenArmorIcon());
-        } else {
-            this.inventory.setItem(firstId+5, pieces.get(2).toItemStack());
-        }
-
-        if (pieces.get(3).tier() > highestTier) {
-            this.inventory.setItem(firstId+6, RPGInventory.getInstance().getPluginConfig().getMenuHiddenArmorIcon());
-        } else {
-            this.inventory.setItem(firstId+6, pieces.get(3).toItemStack());
-        }
-
-        if (pieces.get(4).tier() > highestTier) {
-            this.inventory.setItem(firstId+7, RPGInventory.getInstance().getPluginConfig().getMenuHiddenArmorIcon());
-        } else {
-            this.inventory.setItem(firstId+7, pieces.get(4).toItemStack());
-        }
-
-        if (pieces.getLast().tier() > highestTier) {
-            this.inventory.setItem(firstId+8, RPGInventory.getInstance().getPluginConfig().getMenuHiddenArmorIcon());
-        } else {
-            this.inventory.setItem(firstId+8, pieces.getLast().toItemStack());
+        for (int i = 0; i < pieces.size(); i++) {
+            ArmorPiece piece = pieces.get(i);
+            ItemStack display = (piece.tier() > highestTier)
+                    ? RPGInventory.getInstance().getPluginConfig().getMenuHiddenArmorIcon()
+                    : piece.toItemStack();
+            this.inventory.setItem(firstId + 3 + i, display);
         }
     }
 }

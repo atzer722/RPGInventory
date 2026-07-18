@@ -16,7 +16,7 @@ menu:
   command: "menu" # The command that will be used to open your menu.
   back_button: "minecraft:cobblestone"
   left_arrow_button: "minecraft:acacia_boat"
-  not_equipped_button: "minecraft:grey_dye"
+  not_equipped_button: "minecraft:gray_dye"
   equipped_button: "minecraft:green_dye"
   right_arrow_button: "minecraft:oak_boat"
   hidden_armor_icon: "minecraft:bedrock"

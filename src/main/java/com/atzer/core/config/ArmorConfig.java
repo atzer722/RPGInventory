@@ -26,12 +26,12 @@ public final class ArmorConfig {
     }
 
     public String getArmorPieceId(int zoneId, int step, ArmorType type) {
-        return get().getString(zoneId + ".steps." + step + "." + type.name() + ".id", "minecraft:bedrock");
+        return get().getString(zoneId + ".steps." + step + "." + type.name().toLowerCase() + ".id", "minecraft:bedrock");
     }
 
     public String getArmorPiecePermissionId(int zoneId, int step, ArmorType type) {
         return get().getString(
-                zoneId + ".steps." + step + "." + type.name() + ".permission_id",
+                zoneId + ".steps." + step + "." + type.name().toLowerCase() + ".permission_id",
                 "zone_" + zoneId + "_step_" + step + "_" + type.name()
         );
     }

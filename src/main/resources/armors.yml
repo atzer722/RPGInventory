@@ -6,104 +6,104 @@
     1:
       header:
         id: _iainternal:icon_left_blue
-        permission_id: zone_1_step_1_header # Must be unique!!! (Useless for header).
+        permission_id: rpginventory.zone_1_step_1_header # Must be unique!!! (Useless for header).
       helmet:
         id: _iainternal:icon_right_blue
-        permission_id: zone_1_step_1_helmet
+        permission_id: rpginventory.zone_1_step_1_helmet
       chestplate:
         id: _iainternal:icon_search
-        permission_id: zone_1_step_1_chestplate
+        permission_id: rpginventory.zone_1_step_1_chestplate
       legging:
         id: _iainternal:icon_cancel
-        permission_id: zone_1_step_1_legging
+        permission_id: rpginventory.zone_1_step_1_legging
       boots:
         id: _iainternal:icon_arrow_chest
-        permission_id: zone_1_step_1_boots
+        permission_id: rpginventory.zone_1_step_1_boots
 
     2:
       header:
         id: _iainternal:icon_left_blue
-        permission_id: zone_1_step_2_header
+        permission_id: rpginventory.zone_1_step_2_header
       helmet:
         id: _iainternal:icon_left_blue
-        permission_id: zone_1_step_2_hemet
+        permission_id: rpginventory.zone_1_step_2_hemet
       chestplate:
         id: _iainternal:icon_search
-        permission_id: zone_1_step_2_chestplate
+        permission_id: rpginventory.zone_1_step_2_chestplate
       legging:
         id: _iainternal:icon_cancel
-        permission_id: zone_id_step_2_legging
+        permission_id: rpginventory.zone_id_step_2_legging
       boots:
         id: _iainternal:icon_arrow_chest
-        permission_id: zone_1_step_2_boots
+        permission_id: rpginventory.zone_1_step_2_boots
 
     3:
       header:
         id: _iainternal:icon_left_blue
-        permission_id: zone_1_step_3_header
+        permission_id: rpginventory.zone_1_step_3_header
       helmet:
         id: _iainternal:icon_right_blue
-        permission_id: zone_1_step_3_helmet
+        permission_id: rpginventory.zone_1_step_3_helmet
       chestplate:
         id: _iainternal:icon_search
-        permission_id: zone_1_step_3_chestplate
+        permission_id: rpginventory.zone_1_step_3_chestplate
       legging:
         id: _iainternal:icon_search
-        permission_id: zone_1_step_3_legging
+        permission_id: rpginventory.zone_1_step_3_legging
       boots:
         id: _iainternal:icon_arrow_chest
-        permission_id: zone_1_step_3_boots
+        permission_id: rpginventory.zone_1_step_3_boots
 
     4:
       header:
         id: _iainternal:icon_left_blue
-        permission_id: zone_1_step_4_header
+        permission_id: rpginventory.zone_1_step_4_header
       helmet:
         id: _iainternal:icon_left_blue
-        permission_id: zone_1_step_4_helmet
+        permission_id: rpginventory.zone_1_step_4_helmet
       chestplate:
         id: _iainternal:icon_search
-        permission_id: zone_1_step_4_chestplate
+        permission_id: rpginventory.zone_1_step_4_chestplate
       legging:
         id: _iainternal:icon_cancel
-        permission_id: zone_1_step_4_legging
+        permission_id: rpginventory.zone_1_step_4_legging
       boots:
         id: _iainternal:icon_arrow_chest
-        permission_id: zone_1_step_4_boots
+        permission_id: rpginventory.zone_1_step_4_boots
 
     5:
       header:
         id: _iainternal:icon_left_blue
-        permission_id: zone_1_step_5_header
+        permission_id: rpginventory.zone_1_step_5_header
       helmet:
         id: _iainternal:icon_right_blue
-        permission_id: zone_1_step_5_helmet
+        permission_id: rpginventory.zone_1_step_5_helmet
       chestplate:
         id: _iainternal:icon_search
-        permission_id: zone_1_step_5_chestplate
+        permission_id: rpginventory.zone_1_step_5_chestplate
       legging:
         id: _iainternal:icon_cancel
-        permission_id: zone_1_step_5_legging
+        permission_id: rpginventory.zone_1_step_5_legging
       boots:
         id: _iainternal:icon_arrow_chest
-        permission_id: zone_1_step_5_boots
+        permission_id: rpginventory.zone_1_step_5_boots
 
     6:
       header:
         id: _iainternal:icon_left_blue
-        permission_id: zone_1_step_6_header
+        permission_id: rpginventory.zone_1_step_6_header
       helmet:
         id: _iainternal:icon_right_blue
-        permission_id: zone_1_step_6_helmet
+        permission_id: rpginventory.zone_1_step_6_helmet
       chestplate:
         id: _iainternal:icon_search
-        permission_id: zone_1_step_6_chestplate
+        permission_id: rpginventory.zone_1_step_6_chestplate
       legging:
         id: _iainternal:icon_cancel
-        permission_id: zone_1_step_6_legging
+        permission_id: rpginventory.zone_1_step_6_legging
       boots:
         id: _iainternal:icon_arrow_chest
-        permission_id: zone_1_step_6_boots
+        permission_id: rpginventory.zone_1_step_6_boots
 
 2:
   title: Zone 2
@@ -111,101 +111,101 @@
     1:
       header:
         id: _iainternal:icon_left_blue
-        permission_id: zone_2_step_1_header
+        permission_id: rpginventory.zone_2_step_1_header
       helmet:
         id: _iainternal:icon_right_blue
-        permission_id: zone_2_step_1_helmet
+        permission_id: rpginventory.zone_2_step_1_helmet
       chestplate:
         id: _iainternal:icon_search
-        permission_id: zone_2_step_1_chestplate
+        permission_id: rpginventory.zone_2_step_1_chestplate
       legging:
         id: _iainternal:icon_cancel
-        permission_id: zone_2_step_1_legging
+        permission_id: rpginventory.zone_2_step_1_legging
       boots:
         id: _iainternal:icon_arrow_chest
-        permission_id: zone_2_step_1_boots
+        permission_id: rpginventory.zone_2_step_1_boots
 
     2:
       header:
         id: _iainternal:icon_left_blue
-        permission_id: zone_2_step_2_header
+        permission_id: rpginventory.zone_2_step_2_header
       helmet:
         id: _iainternal:icon_right_blue
-        permission_id: zone_2_step_2_helmet
+        permission_id: rpginventory.zone_2_step_2_helmet
       chestplate:
         id: _iainternal:icon_search
-        permission_id: zone_2_step_2_chestplate
+        permission_id: rpginventory.zone_2_step_2_chestplate
       legging:
         id: _iainternal:icon_cancel
-        permission_id: zone_2_step_2_legging
+        permission_id: rpginventory.zone_2_step_2_legging
       boots:
         id: _iainternal:icon_arrow_chest
-        permission_id: zone_2_step_2_boots
+        permission_id: rpginventory.zone_2_step_2_boots
 
     3:
       header:
         id: _iainternal:icon_left_blue
-        permission_id: zone_2_step_3_header
+        permission_id: rpginventory.zone_2_step_3_header
       helmet:
         id: _iainternal:icon_right_blue
-        permission_id: zone_2_step_3_helmet
+        permission_id: rpginventory.zone_2_step_3_helmet
       chestplate:
         id: _iainternal:icon_search
-        permission_id: zone_2_step_3_chestplate
+        permission_id: rpginventory.zone_2_step_3_chestplate
       legging:
         id: _iainternal:icon_cancel
-        permission_id: zone_2_step_3_legging
+        permission_id: rpginventory.zone_2_step_3_legging
       boots:
         id: _iainternal:icon_arrow_chest
-        permission_id: zone_2_step_3_boots
+        permission_id: rpginventory.zone_2_step_3_boots
 
     4:
       header:
         id: _iainternal:icon_left_blue
-        permission_id: zone_2_step_4_header
+        permission_id: rpginventory.zone_2_step_4_header
       helmet:
         id: _iainternal:icon_right_blue
-        permission_id: zone_2_step_4_helmet
+        permission_id: rpginventory.zone_2_step_4_helmet
       chestplate:
         id: _iainternal:icon_search
-        permission_id: zone_2_step_4_chestplate
+        permission_id: rpginventory.zone_2_step_4_chestplate
       legging:
         id: _iainternal:icon_cancel
-        permission_id: zone_2_step_4_legging
+        permission_id: rpginventory.zone_2_step_4_legging
       boots:
         id: _iainternal:icon_arrow_chest
-        permission_id: zone_2_step_4_boots
+        permission_id: rpginventory.zone_2_step_4_boots
 
     5:
       header:
         id: _iainternal:icon_left_blue
-        permission_id: zone_2_step_5_header
+        permission_id: rpginventory.zone_2_step_5_header
       helmet:
         id: _iainternal:icon_right_blue
-        permission_id: zone_2_step_5_helmet
+        permission_id: rpginventory.zone_2_step_5_helmet
       chestplate:
         id: _iainternal:icon_search
-        permission_id: zone_2_step_5_chesplate
+        permission_id: rpginventory.zone_2_step_5_chesplate
       legging:
         id: _iainternal:icon_search
-        permission_id: zone_2_step_5_legging
+        permission_id: rpginventory.zone_2_step_5_legging
       boots:
         id: _iainternal:icon_arrow_chest
-        permission_id: zone_2_step_5_boots
+        permission_id: rpginventory.zone_2_step_5_boots
 
     6:
       header:
         id: _iainternal:icon_left_blue
-        permission_id: zone_2_step_6_header
+        permission_id: rpginventory.zone_2_step_6_header
       helmet:
         id: _iainternal:icon_right_blue
-        permission_id: zone_2_step_6_helmet
+        permission_id: rpginventory.zone_2_step_6_helmet
       chestplate:
         id: _iainternal:icon_search
-        permission_id: zone_2_step_6_chestplate
+        permission_id: rpginventory.zone_2_step_6_chestplate
       legging:
         id: _iainternal:icon_search
-        permission_id: zone_2_step_6_legging
+        permission_id: rpginventory.zone_2_step_6_legging
       boots:
         id: _iainternal:icon_arrow_chest
-        permission_id: zone_2_step_6_boots
+        permission_id: rpginventory.zone_2_step_6_boots

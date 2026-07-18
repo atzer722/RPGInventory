@@ -13,7 +13,7 @@ public final class ItemStackUtils {
 
     public ItemStack stringToItemStack(String s) {
         if (s.startsWith("minecraft:")) {
-            Material material = Material.getMaterial(s.substring(10));
+            Material material = Material.getMaterial(s.substring(10).toUpperCase());
 
             if (material == null) {
                 throw new IllegalArgumentException("The item " + s + " is not a valid item!");

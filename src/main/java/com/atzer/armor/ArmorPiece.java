@@ -11,7 +11,7 @@ public record ArmorPiece(ArmorType type, String itemId, String permission, int t
 
     public @Nullable ItemStack toItemStack() {
         if (this.itemId.startsWith("minecraft:")) {
-            Material material = Material.getMaterial(this.itemId.substring(10));
+            Material material = Material.getMaterial(this.itemId.substring(10).toUpperCase());
 
             if (material == null) return null;
 

@@ -49,9 +49,7 @@ public final class RPGInventory extends JavaPlugin {
         this.armorZoneRegistry.loadRegistry();
 
         this.playerDataManager = new PlayerDataManager(new PlayerDataRepository());
-
         this.itemStackUtils = new ItemStackUtils();
-
         this.errorHandler = new ErrorHandler();
 
         this.saveDefaultConfig();
@@ -85,6 +83,7 @@ public final class RPGInventory extends JavaPlugin {
     @Override
     public void reloadConfig() {
         super.reloadConfig();
+        this.saveResource("armors.yml", false);
         this.armorConfig = new ArmorConfig(YamlConfiguration.loadConfiguration(new File(this.getDataFolder() + "/armors.yml")));
         this.armorZoneRegistry.loadRegistry();
     }
