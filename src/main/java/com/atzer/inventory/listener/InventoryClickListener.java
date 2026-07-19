@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 
 public final class InventoryClickListener implements Listener {
@@ -17,7 +18,10 @@ public final class InventoryClickListener implements Listener {
     public void onInventoryClickEvent(InventoryClickEvent event) {
         if (event.getClickedInventory() == null) return;
         if (!(event.getWhoClicked() instanceof Player player)) return;
-        if (!(event.getClickedInventory().getHolder() instanceof CustomInventory customInventory)) return;
+        if (!(event.getClickedInventory().getHolder() instanceof CustomInventory customInventory)) {
+            handlePlayerInventoryInteraction(event);
+            return;
+        }
         event.setCancelled(true);
 
         ItemStack item = event.getCurrentItem();
@@ -73,4 +77,10 @@ public final class InventoryClickListener implements Listener {
     }
 
     private void handleMenuHiddenArmorButtonInteraction() {}
+
+    private void handlePlayerInventoryInteraction(InventoryClickEvent event) {
+        if (event.getSlotType() == InventoryType.SlotType.ARMOR) {
+            event.setCancelled(true);
+        }
+    }
 }
