@@ -15,6 +15,10 @@ public final class Config {
         return get().getString("menu.command", "menu");
     }
 
+    public boolean getMenuServerExecution() {
+        return get().getBoolean("menu.server_execution", false);
+    }
+
     public ItemStack getMenuBackButton() {
         return this.getConfigItem("menu.back_button", "minecraft:cobblestone", InteractionType.MENU_BACK_BUTTON);
     }

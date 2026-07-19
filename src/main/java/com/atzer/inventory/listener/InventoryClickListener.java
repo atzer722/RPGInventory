@@ -41,6 +41,14 @@ public final class InventoryClickListener implements Listener {
     }
 
     private void handleMenuBackButtonInteraction(Player player) {
+        if (RPGInventory.getInstance().getPluginConfig().getMenuServerExecution()) {
+            RPGInventory.getInstance().getServer().dispatchCommand(
+                    RPGInventory.getInstance().getServer().getConsoleSender(),
+                    RPGInventory.getInstance().getPluginConfig().getMenuCommand().replace("{player}", player.getName())
+            );
+            return;
+        }
+
         player.performCommand(RPGInventory.getInstance().getPluginConfig().getMenuCommand());
     }
 

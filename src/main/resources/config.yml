@@ -13,7 +13,8 @@
 # For any issues, please open an issue on GitHub (https://github.com/atzer722/RPGInventory) or send a message on Discord (atzer).
 
 menu:
-  command: "menu" # The command that will be used to open your menu.
+  command: "dm open main_menu {player}" # The command that will be used to open your menu.
+  server_execution: true # If the command should be executed by the player (with the player permission) or the server (full permissions) ? (if true, the {player} will be replaced by the player name
   back_button: "minecraft:cobblestone"
   left_arrow_button: "minecraft:acacia_boat"
   not_equipped_button: "minecraft:gray_dye"
