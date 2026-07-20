@@ -1,6 +1,6 @@
 name: RPGInventory
 main: com.atzer.RPGInventory
-version: "2.1"
+version: "2.2-SNAPSHOT"
 api-version: "1.21"
 load: POSTWORLD
 prefix: RPGInventory

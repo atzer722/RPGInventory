@@ -55,9 +55,17 @@ public final class PlayerDataManager {
         return highest;
     }
 
+    public void equipCurrentZone(Player player) {
+        this.applyBestArmor(player);
+    }
+
     private void applyBestArmor(Player player) {
-        PlayerData data = playerDataRepository.findById(player.getUniqueId())
-                .orElse(new PlayerData(player.getUniqueId(), 1)); // zone 1 par défaut
+        PlayerData data = this.getPlayerData(player);
+
+        if  (data == null) {
+            RPGInventory.getInstance().getErrorHandler().handleNoPlayerDataError(player);
+            return;
+        }
 
         ArmorZone zone = RPGInventory.getInstance()
                 .getArmorZoneRegistry()
