@@ -2,25 +2,13 @@ package com.atzer.armor;
 
 import com.atzer.RPGInventory;
 import com.atzer.core.item.NamespacedKeysEnum;
-import dev.lone.itemsadder.api.CustomStack;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 public record ArmorPiece(ArmorType type, String itemId, String permission, int tier) {
 
     public @Nullable ItemStack toItemStack() {
-        if (this.itemId.startsWith("minecraft:")) {
-            Material material = Material.getMaterial(this.itemId.substring(10).toUpperCase());
-
-            if (material == null) return null;
-
-            return this.addData(new ItemStack(material));
-        }
-
-        CustomStack stack = CustomStack.getInstance(this.itemId);
-
-        return this.addData(stack.getItemStack());
+        return this.addData(RPGInventory.getInstance().getItemStackUtils().stringToItemStack(this.itemId));
     }
 
     private @Nullable ItemStack addData(ItemStack item) {

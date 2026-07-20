@@ -8,11 +8,12 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 @NoArgsConstructor
 public final class ItemStackUtils {
 
-    public ItemStack stringToItemStack(String s) {
+    public @NonNull ItemStack stringToItemStack(String s) {
         if (s.startsWith("minecraft:")) {
             Material material = Material.getMaterial(s.substring(10).toUpperCase());
 
@@ -29,7 +30,10 @@ public final class ItemStackUtils {
 
         String[] sArray = s.split(":");
         if (sArray.length == 2) {
-            return MMOItems.plugin.getItem(sArray[0], sArray[1]);
+            ItemStack stack = MMOItems.plugin.getItem(sArray[0], sArray[1]);
+            if (stack != null) {
+                return stack;
+            }
         }
 
         throw new IllegalArgumentException("The item " + s + " is not a valid item!");
