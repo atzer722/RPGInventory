@@ -14,7 +14,7 @@
 
 menu:
   command: "dm open main_menu {player}" # The command that will be used to open your menu.
-  server_execution: true # If the command should be executed by the player (with the player permission) or the server (full permissions) ? (if true, the {player} will be replaced by the player name
+  server_execution: true # If the command should be executed by the player (with the player permission) or the server (full permissions) ? (if true, the {player} will be replaced by the player name)
   back_button: "minecraft:cobblestone"
   left_arrow_button: "minecraft:acacia_boat"
   not_equipped_button: "minecraft:gray_dye"

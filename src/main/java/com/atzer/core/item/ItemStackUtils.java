@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.Nullable;
 
 @NoArgsConstructor
 public final class ItemStackUtils {
@@ -40,7 +41,7 @@ public final class ItemStackUtils {
         });
     }
 
-    public String getPersistentDataString(ItemStack item, NamespacedKey key) {
+    public @Nullable String getPersistentDataString(ItemStack item, NamespacedKey key) {
         return item.getPersistentDataContainer().get(key, PersistentDataType.STRING);
     }
 }
