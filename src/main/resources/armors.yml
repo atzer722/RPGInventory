@@ -26,13 +26,13 @@
         permission_id: rpginventory.zone_1_step_2_header
       helmet:
         id: _iainternal:icon_left_blue
-        permission_id: rpginventory.zone_1_step_2_hemet
+        permission_id: rpginventory.zone_1_step_2_helmet
       chestplate:
         id: _iainternal:icon_search
         permission_id: rpginventory.zone_1_step_2_chestplate
       legging:
         id: _iainternal:icon_cancel
-        permission_id: rpginventory.zone_id_step_2_legging
+        permission_id: rpginventory.zone_1_step_2_legging
       boots:
         id: _iainternal:icon_arrow_chest
         permission_id: rpginventory.zone_1_step_2_boots
@@ -185,7 +185,7 @@
         permission_id: rpginventory.zone_2_step_5_helmet
       chestplate:
         id: _iainternal:icon_search
-        permission_id: rpginventory.zone_2_step_5_chesplate
+        permission_id: rpginventory.zone_2_step_5_chestplate
       legging:
         id: _iainternal:icon_search
         permission_id: rpginventory.zone_2_step_5_legging
