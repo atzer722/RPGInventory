@@ -7,9 +7,11 @@ import com.atzer.core.config.Config;
 import com.atzer.core.error.ErrorHandler;
 import com.atzer.inventory.command.RPGInventoryCommand;
 import com.atzer.inventory.listener.InventoryClickListener;
+import com.atzer.player.listener.PlayerDeathListener;
 import com.atzer.player.listener.PlayerJoinListener;
 import com.atzer.player.PlayerDataManager;
 import com.atzer.player.PlayerDataRepository;
+import com.atzer.player.listener.PlayerSpawnListener;
 import com.atzer.reload.command.ReloadCommand;
 import lombok.Getter;
 import net.luckperms.api.LuckPerms;
@@ -71,6 +73,8 @@ public final class RPGInventory extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("reload")).setExecutor(new ReloadCommand());
         this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
         this.getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerDeathListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerSpawnListener(), this);
 
         this.getLogger().info("Plugin RPGInventory enabled!");
     }
