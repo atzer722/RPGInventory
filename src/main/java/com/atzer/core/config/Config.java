@@ -5,6 +5,9 @@ import com.atzer.core.item.NamespacedKeysEnum;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public final class Config {
 
     private static FileConfiguration get() {
@@ -47,6 +50,54 @@ public final class Config {
         ItemStack item = RPGInventory.getInstance().getItemStackUtils().stringToItemStack(get().getString(path, defaultValue));
         RPGInventory.getInstance().getItemStackUtils().addPersistentDataString(item, NamespacedKeysEnum.CONFIG_TYPE.getNamespacedKey(), type.name());
         return item;
+    }
+
+    private Map<String, Object> checkConfig() {
+        Map<String, Object> map = new HashMap<>();
+
+        if (get().getConfigurationSection("menu.command") == null) {
+            map.put("menu.command", "dm open main_menu {player}");
+        }
+
+        if (get().getConfigurationSection("menu.server_execution") == null) {
+            map.put("menu.server_execution", true);
+        }
+
+        if (get().getConfigurationSection("menu.back_button") == null) {
+            map.put("menu.back_button", "minecraft:cobblestone");
+        }
+
+        if (get().getConfigurationSection("menu.left_arrow_button") == null) {
+            map.put("menu.left_arrow_button", "minecraft:acacia_boat");
+        }
+
+        if (get().getConfigurationSection("menu.not_equipped_button") == null) {
+            map.put("menu.not_equipped_button", "minecraft:gray_dye");
+        }
+
+        if (get().getConfigurationSection("menu.equipped_button") == null) {
+            map.put("menu.equipped_button", "minecraft:green_dye");
+        }
+
+        if (get().getConfigurationSection("menu.right_arrow_button") == null) {
+            map.put("menu.right_arrow_button", "minecraft:oak_boat");
+        }
+
+        if (get().getConfigurationSection("menu.hidden_armor_icon") == null) {
+            map.put("menu.hidden_armor_icon", "minecraft:bedrock");
+        }
+
+        return map;
+    }
+
+    public Map<String, Object> updateConfig() {
+        Map<String, Object> checkMap = checkConfig();
+
+        for (Map.Entry<String, Object> entry : checkMap.entrySet()) {
+            get().set(entry.getKey(), entry.getValue());
+        }
+        RPGInventory.getInstance().saveConfig();
+        return checkMap;
     }
 
     public enum InteractionType {
