@@ -14,6 +14,7 @@
 
 menu:
   command: "dm open main_menu {player}" # The command that will be used to open your menu.
+  inventory_texture: "rpginventory:gui_background" # ItemsAdder texture that will be applied to the gui.
   server_execution: true # If the command should be executed by the player (with the player permission) or the server (full permissions) ? (if true, the {player} will be replaced by the player name)
   back_button: "minecraft:cobblestone"
   left_arrow_button: "minecraft:acacia_boat"

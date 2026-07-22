@@ -5,7 +5,12 @@ import com.atzer.armor.ArmorPiece;
 import com.atzer.armor.ArmorType;
 import com.atzer.armor.ArmorZone;
 import com.atzer.player.PlayerData;
+import dev.lone.itemsadder.api.FontImages.FontImageWrapper;
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -20,8 +25,26 @@ public final class CustomInventory implements InventoryHolder {
     private final ArmorZone armorZone;
 
     public CustomInventory(RPGInventory plugin, ArmorZone armorZone) {
-        this.inventory = plugin.getServer().createInventory(this, 54);
+        this.inventory = plugin.getServer().createInventory(this, 54, buildTitle(armorZone));
         this.armorZone = armorZone;
+    }
+
+    private static Component buildTitle(ArmorZone armorZone) {
+        FontImageWrapper bg = FontImageWrapper.instance(RPGInventory.getInstance().getPluginConfig().getMenuInventoryTexture());
+
+        Component background;
+        if (bg != null && bg.exists()) {
+            background = LegacyComponentSerializer.legacySection().deserialize(bg.getString());
+        } else {
+            background = Component.empty();
+        }
+
+        Component zoneName = Component.text(armorZone.title())
+                .color(NamedTextColor.WHITE)
+                .decoration(TextDecoration.ITALIC, false)
+                .decoration(TextDecoration.BOLD, false);
+
+        return background.append(zoneName);
     }
 
     public static void openInventory(Player player, ArmorZone zone) {

@@ -46,6 +46,10 @@ public final class Config {
         return this.getConfigItem("menu.hidden_armor_icon", "minecraft:bedrock", InteractionType.MENU_HIDDEN_ARMOR_BUTTON);
     }
 
+    public String getMenuInventoryTexture() {
+        return get().getString("menu.inventory_texture", "rpginventory:gui_background");
+    }
+
     private ItemStack getConfigItem(String path, String defaultValue, InteractionType type) {
         ItemStack item = RPGInventory.getInstance().getItemStackUtils().stringToItemStack(get().getString(path, defaultValue));
         RPGInventory.getInstance().getItemStackUtils().addPersistentDataString(item, NamespacedKeysEnum.CONFIG_TYPE.getNamespacedKey(), type.name());
@@ -85,6 +89,10 @@ public final class Config {
 
         if (get().getConfigurationSection("menu.hidden_armor_icon") == null) {
             map.put("menu.hidden_armor_icon", "minecraft:bedrock");
+        }
+
+        if (get().getConfigurationSection("menu.inventory_texture") == null) {
+            map.put("menu.inventory_texture", "rpginventory:gui_background");
         }
 
         return map;
