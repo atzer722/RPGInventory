@@ -31,7 +31,7 @@ public final class Config {
     }
 
     public ItemStack getMenuNotEquippedButton() {
-        return this.getConfigItem("menu.not_equipped_button", "minecraft:grey_dye", InteractionType.MENU_NOT_EQUIPPED_BUTTON);
+        return this.getConfigItem("menu.not_equipped_button", "minecraft:gray_dye", InteractionType.MENU_NOT_EQUIPPED_BUTTON);
     }
 
     public ItemStack getMenuEquippedButton() {
@@ -59,39 +59,39 @@ public final class Config {
     private Map<String, Object> checkConfig() {
         Map<String, Object> map = new HashMap<>();
 
-        if (get().getConfigurationSection("menu.command") == null) {
+        if (!get().isSet("menu.command")) {
             map.put("menu.command", "dm open main_menu {player}");
         }
 
-        if (get().getConfigurationSection("menu.server_execution") == null) {
+        if (!get().isSet("menu.server_execution")) {
             map.put("menu.server_execution", true);
         }
 
-        if (get().getConfigurationSection("menu.back_button") == null) {
+        if (!get().isSet("menu.back_button")) {
             map.put("menu.back_button", "minecraft:cobblestone");
         }
 
-        if (get().getConfigurationSection("menu.left_arrow_button") == null) {
+        if (!get().isSet("menu.left_arrow_button")) {
             map.put("menu.left_arrow_button", "minecraft:acacia_boat");
         }
 
-        if (get().getConfigurationSection("menu.not_equipped_button") == null) {
+        if (!get().isSet("menu.not_equipped_button")) {
             map.put("menu.not_equipped_button", "minecraft:gray_dye");
         }
 
-        if (get().getConfigurationSection("menu.equipped_button") == null) {
+        if (!get().isSet("menu.equipped_button")) {
             map.put("menu.equipped_button", "minecraft:green_dye");
         }
 
-        if (get().getConfigurationSection("menu.right_arrow_button") == null) {
+        if (!get().isSet("menu.right_arrow_button")) {
             map.put("menu.right_arrow_button", "minecraft:oak_boat");
         }
 
-        if (get().getConfigurationSection("menu.hidden_armor_icon") == null) {
+        if (!get().isSet("menu.hidden_armor_icon")) {
             map.put("menu.hidden_armor_icon", "minecraft:bedrock");
         }
 
-        if (get().getConfigurationSection("menu.inventory_texture") == null) {
+        if (!get().isSet("menu.inventory_texture")) {
             map.put("menu.inventory_texture", "rpginventory:gui_background");
         }
 
