@@ -1,5 +1,6 @@
 package com.atzer.player;
 
+import com.atzer.PluginRepository;
 import com.atzer.RPGInventory;
 import com.atzer.armor.ArmorPiece;
 import com.atzer.armor.ArmorType;
@@ -14,10 +15,12 @@ import java.util.*;
 @RequiredArgsConstructor
 public final class PlayerDataManager {
 
-    private final PlayerDataRepository playerDataRepository;
+    private static PluginRepository<PlayerData, UUID> getPlayerDataRepository() {
+        return RPGInventory.getInstance().getPlayerDataRepository();
+    }
 
     public @Nullable PlayerData getPlayerData(Player player) {
-        Optional<PlayerData> playerData = this.playerDataRepository.findById(player.getUniqueId());
+        Optional<PlayerData> playerData = getPlayerDataRepository().findById(player.getUniqueId());
 
         if (playerData.isEmpty()) {
             RPGInventory.getInstance().getErrorHandler().handleNoPlayerDataError(player);
@@ -28,7 +31,7 @@ public final class PlayerDataManager {
     }
 
     public void playerJoinEventHandler(Player player) {
-        if (this.playerDataRepository.findById(player.getUniqueId()).isEmpty()) {
+        if (getPlayerDataRepository().findById(player.getUniqueId()).isEmpty()) {
             this.playerFirstJoinEventHandler(player);
         }
         this.applyBestArmor(player); // gère les deux cas
@@ -37,7 +40,7 @@ public final class PlayerDataManager {
     // Quand le joueur change de zone dans le menu
     public void onZoneSelected(Player player, int zoneId) {
         PlayerData updated = new PlayerData(player.getUniqueId(), zoneId);
-        this.playerDataRepository.update(updated);
+        getPlayerDataRepository().update(updated);
         this.applyBestArmor(player);
     }
 
@@ -112,17 +115,15 @@ public final class PlayerDataManager {
                 continue;
             }
 
-            ArmorPiece best = zone.getPiecesOfType(type).stream()
+            zone.getPiecesOfType(type).stream()
                     .filter(p -> p.tier() == targetTier)
-                    .findFirst()
-                    .orElse(null);
+                    .findFirst().ifPresent(best -> equipPiece(player, best));
 
-            if (best != null) equipPiece(player, best);
         }
     }
 
-    private PlayerData playerFirstJoinEventHandler(Player player) {
-        return this.playerDataRepository.save(new PlayerData(
+    private void playerFirstJoinEventHandler(Player player) {
+        getPlayerDataRepository().save(new PlayerData(
                 player.getUniqueId(),
                 1 // zone 1 par défaut
         ));

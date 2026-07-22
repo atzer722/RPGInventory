@@ -1,16 +1,17 @@
 package com.atzer;
 
 import com.atzer.armor.ArmorZoneRegistry;
-import com.atzer.core.item.ItemStackUtils;
 import com.atzer.core.config.ArmorConfig;
 import com.atzer.core.config.Config;
 import com.atzer.core.error.ErrorHandler;
+import com.atzer.core.item.ItemStackUtils;
 import com.atzer.inventory.command.RPGInventoryCommand;
 import com.atzer.inventory.listener.InventoryClickListener;
-import com.atzer.player.listener.PlayerDeathListener;
-import com.atzer.player.listener.PlayerJoinListener;
+import com.atzer.player.PlayerData;
 import com.atzer.player.PlayerDataManager;
 import com.atzer.player.PlayerDataRepository;
+import com.atzer.player.listener.PlayerDeathListener;
+import com.atzer.player.listener.PlayerJoinListener;
 import com.atzer.player.listener.PlayerSpawnListener;
 import com.atzer.reload.command.ReloadCommand;
 import lombok.Getter;
@@ -25,6 +26,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 public final class RPGInventory extends JavaPlugin {
@@ -35,6 +37,7 @@ public final class RPGInventory extends JavaPlugin {
     private Config pluginConfig;
     private ArmorConfig armorConfig;
     private ArmorZoneRegistry armorZoneRegistry;
+    private PluginRepository<PlayerData, UUID> playerDataRepository;
     private PlayerDataManager playerDataManager;
     private LuckPerms luckPermsApi;
     private ItemStackUtils itemStackUtils;
@@ -50,7 +53,8 @@ public final class RPGInventory extends JavaPlugin {
         this.armorZoneRegistry = new ArmorZoneRegistry();
         this.armorZoneRegistry.loadRegistry();
 
-        this.playerDataManager = new PlayerDataManager(new PlayerDataRepository());
+        this.playerDataRepository = new PlayerDataRepository();
+        this.playerDataManager = new PlayerDataManager();
         this.itemStackUtils = new ItemStackUtils();
         this.errorHandler = new ErrorHandler();
 

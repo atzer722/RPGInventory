@@ -2,10 +2,10 @@ package com.atzer;
 
 import java.util.Optional;
 
-public interface PluginRepository<U, V> {
+public abstract class PluginRepository<U, V> {
 
-    U save(U obj);
-    Optional<U> findById(V id);
-    boolean delete(U obj);
-    U update(U obj);
+    public abstract U save(U obj);
+    public abstract Optional<U> findById(V id);
+    public abstract boolean delete(U obj);
+    public abstract U update(U obj);
 }
