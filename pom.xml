@@ -5,7 +5,7 @@
 
     <groupId>com.neko</groupId>
     <artifactId>rpginventory</artifactId>
-    <version>2.2-SNAPSHOT</version>
+    <version>2.2</version>
     <packaging>jar</packaging>
 
     <name>RPGInventory</name>
