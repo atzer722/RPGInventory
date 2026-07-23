@@ -58,7 +58,7 @@ public final class RPGInventory extends JavaPlugin {
         this.armorZoneRegistry = new ArmorZoneRegistry();
         this.armorZoneRegistry.loadRegistry();
 
-        this.playerDataRepository = new PlayerDataRepositoryYaml();
+        this.setPlayerDataRepository();
         this.playerDataManager = new PlayerDataManager();
         this.itemStackUtils = new ItemStackUtils();
         this.errorHandler = new ErrorHandler();
