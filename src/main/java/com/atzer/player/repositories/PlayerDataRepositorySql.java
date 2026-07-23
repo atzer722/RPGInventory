@@ -3,6 +3,7 @@ package com.atzer.player.repositories;
 import com.atzer.PluginRepository;
 import com.atzer.RPGInventory;
 import com.atzer.player.PlayerData;
+import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
@@ -11,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 public class PlayerDataRepositorySql extends PluginRepository<PlayerData, UUID> {
 
@@ -37,67 +39,93 @@ public class PlayerDataRepositorySql extends PluginRepository<PlayerData, UUID> 
     }
 
     @Override
-    public PlayerData save(@NotNull PlayerData obj) {
-        String sql = isSQLite()
-                ? "INSERT OR REPLACE INTO player_data (uuid, zone_id) VALUES (?, ?);"
-                : "INSERT INTO player_data (uuid, zone_id) VALUES (?, ?) ON DUPLICATE KEY UPDATE zone_id = VALUES(zone_id);";
+    public CompletableFuture<PlayerData> save(@NotNull PlayerData obj) {
+        CompletableFuture<PlayerData> future = new CompletableFuture<>();
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, obj.uuid().toString());
-            ps.setInt(2, obj.armorZoneId());
-            ps.executeUpdate();
-            return obj;
-        } catch (SQLException e) {
-            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql, e);
-        }
-        return null;
-    }
+        Bukkit.getScheduler().runTaskAsynchronously(RPGInventory.getInstance(), () -> {
+            String sql = isSQLite()
+                    ? "INSERT OR REPLACE INTO player_data (uuid, zone_id) VALUES (?, ?);"
+                    : "INSERT INTO player_data (uuid, zone_id) VALUES (?, ?) ON DUPLICATE KEY UPDATE zone_id = VALUES(zone_id);";
 
-    @Override
-    public Optional<PlayerData> findById(UUID id) {
-        String sql = "SELECT * FROM player_data WHERE uuid = ?;";
-
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, id.toString());
-            try (ResultSet rs = ps.executeQuery()) {
-                return Optional.ofNullable(toPlayerData(rs));
+            try (Connection conn = getConnection();
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, obj.uuid().toString());
+                ps.setInt(2, obj.armorZoneId());
+                ps.executeUpdate();
+                future.complete(obj);
+                return;
+            } catch (SQLException e) {
+                RPGInventory.getInstance().getErrorHandler().handleSqlError(sql, e);
             }
-        } catch (SQLException e) {
-            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql, e);
-        }
-        return Optional.empty();
+            future.complete(null);
+        });
+        return future;
     }
 
     @Override
-    public boolean delete(PlayerData obj) {
-        String sql = "DELETE FROM player_data WHERE uuid = ?;";
+    public CompletableFuture<Optional<PlayerData>> findById(UUID id) {
+        CompletableFuture<Optional<PlayerData>> future = new CompletableFuture<>();
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, obj.uuid().toString());
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql, e);
-        }
-        return false;
+        Bukkit.getScheduler().runTaskAsynchronously(RPGInventory.getInstance(), () -> {
+            String sql = "SELECT * FROM player_data WHERE uuid = ?;";
+
+            try (Connection conn = getConnection();
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, id.toString());
+                try (ResultSet rs = ps.executeQuery()) {
+                    future.complete(Optional.ofNullable(toPlayerData(rs)));
+                    return;
+                }
+            } catch (SQLException e) {
+                RPGInventory.getInstance().getErrorHandler().handleSqlError(sql, e);
+            }
+            future.complete(Optional.empty());
+        });
+
+        return future;
     }
 
     @Override
-    public PlayerData update(PlayerData obj) {
-        String sql = "UPDATE player_data SET zone_id = ? WHERE uuid = ?;";
+    public CompletableFuture<Boolean> delete(PlayerData obj) {
+        CompletableFuture<Boolean> future = new CompletableFuture<>();
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, obj.armorZoneId());
-            ps.setString(2, obj.uuid().toString());
-            ps.executeUpdate();
-            return obj;
-        } catch (SQLException e) {
-            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql, e);
-        }
-        return null;
+        Bukkit.getScheduler().runTaskAsynchronously(RPGInventory.getInstance(), () -> {
+            String sql = "DELETE FROM player_data WHERE uuid = ?;";
+
+            try (Connection conn = getConnection();
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, obj.uuid().toString());
+                future.complete(ps.executeUpdate() > 0);
+                return;
+            } catch (SQLException e) {
+                RPGInventory.getInstance().getErrorHandler().handleSqlError(sql, e);
+            }
+            future.complete(false);
+        });
+        return future;
+    }
+
+    @Override
+    public CompletableFuture<PlayerData> update(PlayerData obj) {
+        CompletableFuture<PlayerData> future = new CompletableFuture<>();
+
+        Bukkit.getScheduler().runTaskAsynchronously(RPGInventory.getInstance(), () -> {
+            String sql = "UPDATE player_data SET zone_id = ? WHERE uuid = ?;";
+
+            try (Connection conn = getConnection();
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setInt(1, obj.armorZoneId());
+                ps.setString(2, obj.uuid().toString());
+                ps.executeUpdate();
+                future.complete(obj);
+                return;
+            } catch (SQLException e) {
+                RPGInventory.getInstance().getErrorHandler().handleSqlError(sql, e);
+            }
+            future.complete(null);
+        });
+
+        return future;
     }
 
     private PlayerData toPlayerData(ResultSet rs) throws SQLException {

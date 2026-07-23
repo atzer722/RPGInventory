@@ -4,6 +4,7 @@ import com.atzer.PluginRepository;
 import com.atzer.RPGInventory;
 import com.atzer.player.PlayerData;
 import lombok.NoArgsConstructor;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 @NoArgsConstructor
 public final class PlayerDataRepositoryYaml extends PluginRepository<PlayerData, UUID> {
@@ -19,63 +21,84 @@ public final class PlayerDataRepositoryYaml extends PluginRepository<PlayerData,
     public void init() {}
 
     @Override
-    public PlayerData save(PlayerData obj) {
-        File file = new File(RPGInventory.getInstance().getDataFolder() + "/data/" + obj.uuid().toString());
+    public CompletableFuture<PlayerData> save(PlayerData obj) {
+        CompletableFuture<PlayerData> future = new CompletableFuture<>();
 
-        YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(file);
+        Bukkit.getScheduler().runTaskAsynchronously(RPGInventory.getInstance(), () -> {
+            File file = new File(RPGInventory.getInstance().getDataFolder() + "/data/" + obj.uuid().toString());
+            YamlConfiguration yaml = YamlConfiguration.loadConfiguration(file);
 
-        if (file.exists()) {
-            return this.getPlayerDataFromYaml(obj.uuid(), yamlConfiguration);
-        }
+            if (file.exists()) {
+                future.complete(getPlayerDataFromYaml(obj.uuid(), yaml));
+                return;
+            }
 
-        yamlConfiguration.set("armor_zone_id", obj.armorZoneId());
-        try {
-            yamlConfiguration.save(file);
-        } catch (IOException e) {
-            RPGInventory.getInstance().getLogger().severe("An error occurred while trying to save the player with uuid " + obj.uuid().toString());
-            e.printStackTrace();
-            return null;
-        }
-        return obj;
+            yaml.set("armor_zone_id", obj.armorZoneId());
+            try {
+                yaml.save(file);
+                future.complete(obj);
+            } catch (IOException e) {
+                future.completeExceptionally(e);
+            }
+        });
+
+        return future;
     }
 
     @Override
-    public Optional<PlayerData> findById(UUID id) {
-        File file = new File(RPGInventory.getInstance().getDataFolder() + "/data/" + id.toString());
+    public CompletableFuture<Optional<PlayerData>> findById(UUID id) {
+        CompletableFuture<Optional<PlayerData>> future = new CompletableFuture<>();
 
-        if (file.exists()) {
-            return Optional.of(this.getPlayerDataFromYaml(id, YamlConfiguration.loadConfiguration(file)));
-        }
+        Bukkit.getScheduler().runTaskAsynchronously(RPGInventory.getInstance(), () -> {
+            File file = new File(RPGInventory.getInstance().getDataFolder() + "/data/" + id.toString());
 
-        return Optional.empty();
+            if  (file.exists()) {
+                future.complete(Optional.of(this.getPlayerDataFromYaml(id, YamlConfiguration.loadConfiguration(file))));
+                return;
+            }
+
+            future.complete(Optional.empty());
+        });
+        return future;
     }
 
     @Override
-    public boolean delete(PlayerData obj) {
-        return new File(RPGInventory.getInstance().getDataFolder() + "/data/" + obj.uuid().toString()).delete();
+    public CompletableFuture<Boolean> delete(PlayerData obj) {
+        CompletableFuture<Boolean> future = new CompletableFuture<>();
+
+        Bukkit.getScheduler().runTaskAsynchronously(RPGInventory.getInstance(), () -> {
+            future.complete(new File(RPGInventory.getInstance().getDataFolder() + "/data/" + obj.uuid().toString()).delete());
+        });
+        return future;
     }
 
     @Override
-    public PlayerData update(PlayerData obj) {
-        Optional<PlayerData> playerInData = this.findById(obj.uuid());
+    public CompletableFuture<PlayerData> update(PlayerData obj) {
+        CompletableFuture<PlayerData> future = new CompletableFuture<>();
 
-        if(playerInData.isEmpty()) return this.save(obj);
+        Bukkit.getScheduler().runTaskAsynchronously(RPGInventory.getInstance(), () -> {
+            Optional<PlayerData> playerInData = this.findById(obj.uuid()).join();
 
-        File file = new File(RPGInventory.getInstance().getDataFolder() + "/data/" + obj.uuid().toString());
-        YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(file);
+            if (playerInData.isEmpty()) {
+                future.complete(this.save(obj).join());
+                return;
+            }
 
-        if (!Objects.equals(playerInData.get().armorZoneId(), obj.armorZoneId())) {
-            yamlConfiguration.set("armor_zone_id", obj.armorZoneId());
-        }
+            File file = new File(RPGInventory.getInstance().getDataFolder() + "/data/" + obj.uuid().toString());
+            YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(file);
 
-        try {
-            yamlConfiguration.save(file);
-        } catch (IOException e) {
-            RPGInventory.getInstance().getLogger().severe("An error occurred while trying to update the player with uuid " + obj.uuid().toString());
-            e.printStackTrace();
-            return null;
-        }
-        return obj;
+            if (!Objects.equals(playerInData.get().armorZoneId(), obj.armorZoneId())) {
+                yamlConfiguration.set("armor_zone_id", obj.armorZoneId());
+            }
+
+            try {
+                yamlConfiguration.save(file);
+            } catch (IOException e) {
+                future.completeExceptionally(e);
+            }
+            future.complete(obj);
+        });
+        return future;
     }
 
     private PlayerData getPlayerDataFromYaml(UUID uuid, YamlConfiguration yaml) {
