@@ -36,6 +36,7 @@ public final class RPGInventory extends JavaPlugin {
     @Getter
     private static RPGInventory instance;
 
+    private ErrorHandler errorHandler;
     private Config pluginConfig;
     private ArmorConfig armorConfig;
     private Database database;
@@ -44,11 +45,12 @@ public final class RPGInventory extends JavaPlugin {
     private PlayerDataManager playerDataManager;
     private LuckPerms luckPermsApi;
     private ItemStackUtils itemStackUtils;
-    private ErrorHandler errorHandler;
 
     @Override
     public void onEnable() {
         instance = this;
+
+        this.errorHandler = new ErrorHandler();
         this.pluginConfig = new Config();
         this.database = new Database();
         this.database.init();
@@ -61,7 +63,6 @@ public final class RPGInventory extends JavaPlugin {
         this.setPlayerDataRepository();
         this.playerDataManager = new PlayerDataManager();
         this.itemStackUtils = new ItemStackUtils();
-        this.errorHandler = new ErrorHandler();
 
         this.saveDefaultConfig();
 
@@ -110,6 +111,8 @@ public final class RPGInventory extends JavaPlugin {
         } else {
             this.playerDataRepository = new PlayerDataRepositorySql();
         }
+
+        this.playerDataRepository.init();
     }
 }
 

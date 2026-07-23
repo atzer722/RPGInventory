@@ -6,6 +6,8 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.sql.SQLException;
+
 public final class ErrorHandler {
 
     public void handleNoPlayerDataError(Player player) {
@@ -27,8 +29,9 @@ public final class ErrorHandler {
         throw new IllegalArgumentException("A wrong data motor is set. " + motor);
     }
 
-    public void handleSqlError(String sql) {
-        RPGInventory.getInstance().getLogger().severe("PLEASE CONTACT A DEVELOPER!!!!!!!");
-        throw new RuntimeException("PLEASE CONTACT A DEVELOPER!!!!!!!");
+    public void handleSqlError(String sql, SQLException e) {
+        RPGInventory.getInstance().getLogger().severe("SQL error on: " + sql);
+        RPGInventory.getInstance().getLogger().severe(e.getMessage());
+        throw new RuntimeException(e);
     }
 }

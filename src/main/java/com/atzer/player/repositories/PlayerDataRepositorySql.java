@@ -32,7 +32,7 @@ public class PlayerDataRepositorySql extends PluginRepository<PlayerData, UUID> 
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.execute();
         } catch (SQLException e) {
-            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql);
+            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql, e);
         }
     }
 
@@ -49,7 +49,7 @@ public class PlayerDataRepositorySql extends PluginRepository<PlayerData, UUID> 
             ps.executeUpdate();
             return obj;
         } catch (SQLException e) {
-            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql);
+            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql, e);
         }
         return null;
     }
@@ -65,7 +65,7 @@ public class PlayerDataRepositorySql extends PluginRepository<PlayerData, UUID> 
                 return Optional.ofNullable(toPlayerData(rs));
             }
         } catch (SQLException e) {
-            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql);
+            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql, e);
         }
         return Optional.empty();
     }
@@ -79,7 +79,7 @@ public class PlayerDataRepositorySql extends PluginRepository<PlayerData, UUID> 
             ps.setString(1, obj.uuid().toString());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql);
+            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql, e);
         }
         return false;
     }
@@ -95,7 +95,7 @@ public class PlayerDataRepositorySql extends PluginRepository<PlayerData, UUID> 
             ps.executeUpdate();
             return obj;
         } catch (SQLException e) {
-            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql);
+            RPGInventory.getInstance().getErrorHandler().handleSqlError(sql, e);
         }
         return null;
     }
