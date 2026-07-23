@@ -50,6 +50,29 @@ public final class Config {
         return get().getString("menu.inventory_texture", "rpginventory:gui_background");
     }
 
+    public String getDataMotor() {
+        return get().getString("data.motor", "sqlite");
+    }
+
+    public String getDataHost() {
+        return get().getString("data.host", "localhost");
+    }
+
+    public int getDataPort() {
+        return get().getInt("data.port", 3306);
+    }
+
+    public String getDataName() {
+        return get().getString("data.name", "rpginventory_database");
+    }
+
+    public String getDataUsername() {
+        return get().getString("data.username", "root");
+    }
+    public String getDataPassword() {
+        return get().getString("data.password", "For security, choose a strong password.");
+    }
+
     private ItemStack getConfigItem(String path, String defaultValue, InteractionType type) {
         ItemStack item = RPGInventory.getInstance().getItemStackUtils().stringToItemStack(get().getString(path, defaultValue));
         RPGInventory.getInstance().getItemStackUtils().addPersistentDataString(item, NamespacedKeysEnum.CONFIG_TYPE.getNamespacedKey(), type.name());
@@ -93,6 +116,30 @@ public final class Config {
 
         if (!get().isSet("menu.inventory_texture")) {
             map.put("menu.inventory_texture", "rpginventory:gui_background");
+        }
+
+        if (!get().isSet("data.motor")) {
+            map.put("data.motor", "sqlite");
+        }
+
+        if (!get().isSet("data.host")) {
+            map.put("data.host", "localhost");
+        }
+
+        if (!get().isSet("data.port")) {
+            map.put("data.port", 3306);
+        }
+
+        if (!get().isSet("data.name")) {
+            map.put("data.name", "rpginventory_database");
+        }
+
+        if (!get().isSet("data.username")) {
+            map.put("data.username", "root");
+        }
+
+        if (!get().isSet("data.password")) {
+            map.put("data.password", "For security, choose a strong password.");
         }
 
         return map;

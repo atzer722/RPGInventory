@@ -22,4 +22,17 @@ menu:
   equipped_button: "minecraft:green_dye"
   right_arrow_button: "minecraft:oak_boat"
   hidden_armor_icon: "minecraft:bedrock"
-  # Free Palestine, free Congo, free Ouïghour, free Ukraine, free World.
+
+data:
+  # You can use yaml, mysql, sqlite or mariadb.
+  # YAML and SQLite is for local data storage. MySQL and MariaDB is for distant data storage
+  # As local data storage, we prefer sqlite. As distant data storage, we prefer MariaDB.
+  motor: sqlite
+
+  # Distant only. Settings if you chose MySQL or MariaDB as the motor.
+  host: "localhost"
+  port: 3306
+  name: "rpginventory_database"
+  username: "root" # For security, you can choose another user.
+  password: "For security, choose a strong password."
+# Free Palestine, free Congo, free Ouïghour, free Ukraine, free World.

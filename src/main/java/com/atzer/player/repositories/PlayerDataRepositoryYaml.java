@@ -1,7 +1,8 @@
-package com.atzer.player;
+package com.atzer.player.repositories;
 
 import com.atzer.PluginRepository;
 import com.atzer.RPGInventory;
+import com.atzer.player.PlayerData;
 import lombok.NoArgsConstructor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -12,7 +13,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @NoArgsConstructor
-public final class PlayerDataRepository extends PluginRepository<PlayerData, UUID> {
+public final class PlayerDataRepositoryYaml extends PluginRepository<PlayerData, UUID> {
+
+    @Override
+    public void init() {}
 
     @Override
     public PlayerData save(PlayerData obj) {
