@@ -12,6 +12,7 @@ import com.atzer.player.PlayerData;
 import com.atzer.player.PlayerDataManager;
 import com.atzer.player.listener.PlayerDeathListener;
 import com.atzer.player.listener.PlayerJoinListener;
+import com.atzer.player.listener.PlayerQuitListener;
 import com.atzer.player.listener.PlayerSpawnListener;
 import com.atzer.player.repositories.PlayerDataRepositorySql;
 import com.atzer.player.repositories.PlayerDataRepositoryYaml;
@@ -86,6 +87,7 @@ public final class RPGInventory extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerDeathListener(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerSpawnListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerQuitListener(), this);
 
         this.getLogger().info("Plugin RPGInventory enabled!");
     }

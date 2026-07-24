@@ -39,10 +39,25 @@ public final class PlayerDataRepositoryYaml extends PluginRepository<PlayerData,
                 future.complete(obj);
             } catch (IOException e) {
                 future.completeExceptionally(e);
+                RPGInventory.getInstance().getErrorHandler().handleIOException(e);
+                future.complete(null);
             }
         });
 
         return future;
+    }
+
+    private PlayerData saveInternal(PlayerData obj) {
+        File file = new File(RPGInventory.getInstance().getDataFolder() + "/data/" + obj.uuid().toString());
+        YamlConfiguration yaml = YamlConfiguration.loadConfiguration(file);
+        yaml.set("armor_zone_id", obj.armorZoneId());
+        try {
+            yaml.save(file);
+        } catch (IOException e) {
+            RPGInventory.getInstance().getErrorHandler().handleIOException(e);
+            return null;
+        }
+        return obj;
     }
 
     @Override
@@ -80,7 +95,7 @@ public final class PlayerDataRepositoryYaml extends PluginRepository<PlayerData,
             Optional<PlayerData> playerInData = this.findById(obj.uuid()).join();
 
             if (playerInData.isEmpty()) {
-                future.complete(this.save(obj).join());
+                future.complete(this.saveInternal(obj));
                 return;
             }
 
@@ -95,6 +110,7 @@ public final class PlayerDataRepositoryYaml extends PluginRepository<PlayerData,
                 yamlConfiguration.save(file);
             } catch (IOException e) {
                 future.completeExceptionally(e);
+                future.complete(null);
             }
             future.complete(obj);
         });

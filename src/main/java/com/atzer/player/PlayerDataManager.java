@@ -6,6 +6,7 @@ import com.atzer.armor.ArmorPiece;
 import com.atzer.armor.ArmorType;
 import com.atzer.armor.ArmorZone;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -15,38 +16,50 @@ import java.util.*;
 @RequiredArgsConstructor
 public final class PlayerDataManager {
 
+    private final Map<UUID, PlayerData> cache = new HashMap<>();
+
     private static PluginRepository<PlayerData, UUID> getPlayerDataRepository() {
         return RPGInventory.getInstance().getPlayerDataRepository();
     }
 
     public @Nullable PlayerData getPlayerData(Player player) {
-        Optional<PlayerData> playerData = getPlayerDataRepository().findById(player.getUniqueId()).join();
-
-        if (playerData.isEmpty()) {
+        PlayerData data = cache.get(player.getUniqueId());
+        if (data == null) {
             RPGInventory.getInstance().getErrorHandler().handleNoPlayerDataError(player);
-            return null;
         }
-
-        return playerData.get();
+        return data;
     }
 
     public void playerJoinEventHandler(Player player) {
-        if (getPlayerDataRepository().findById(player.getUniqueId()).join().isEmpty()) {
-            this.playerFirstJoinEventHandler(player);
-        }
-        this.applyBestArmor(player); // gère les deux cas
+        getPlayerDataRepository().findById(player.getUniqueId())
+                .thenAccept(optional -> {
+                    PlayerData data = optional.orElseGet(() -> {
+                        PlayerData newData = new PlayerData(player.getUniqueId(), 1);
+                        getPlayerDataRepository().save(newData);
+                        return newData;
+                    });
+
+                    Bukkit.getScheduler().runTask(RPGInventory.getInstance(), () -> {
+                        cache.put(player.getUniqueId(), data);
+                        applyBestArmor(player);
+                    });
+                });
     }
 
     // Quand le joueur change de zone dans le menu
     public void onZoneSelected(Player player, int zoneId) {
         PlayerData updated = new PlayerData(player.getUniqueId(), zoneId);
-        getPlayerDataRepository().update(updated);
-        this.applyBestArmor(player);
+        cache.put(player.getUniqueId(), updated); // immédiat
+        getPlayerDataRepository().update(updated); // fire-and-forget async
+        applyBestArmor(player);
     }
 
-    // Quand LuckPerms modifie les permissions (NodeMutateEvent)
     public void playerPermissionChangeEventHandler(Player player) {
         this.applyBestArmor(player); // pas besoin de toucher PlayerData, la zone ne change pas
+    }
+
+    public void playerQuitEventHandler(Player player) {
+        cache.remove(player.getUniqueId());
     }
 
     public @Nullable ArmorPiece getHighestUnlockedTier(Player player, ArmorType type, ArmorZone zone) {
@@ -120,13 +133,6 @@ public final class PlayerDataManager {
                     .findFirst().ifPresent(best -> equipPiece(player, best));
 
         }
-    }
-
-    private void playerFirstJoinEventHandler(Player player) {
-        getPlayerDataRepository().save(new PlayerData(
-                player.getUniqueId(),
-                1 // zone 1 par défaut
-        ));
     }
 
     private void unequipSlot(Player player, ArmorType type) {
