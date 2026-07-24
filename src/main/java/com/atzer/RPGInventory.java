@@ -52,13 +52,14 @@ public final class RPGInventory extends JavaPlugin {
 
         this.errorHandler = new ErrorHandler();
         this.pluginConfig = new Config();
-        this.database = new Database();
-        this.database.init();
+
         this.saveResource("armors.yml", false);
         this.armorConfig = new ArmorConfig(YamlConfiguration.loadConfiguration(new File(this.getDataFolder() + "/armors.yml")));
-
         this.armorZoneRegistry = new ArmorZoneRegistry();
         this.armorZoneRegistry.loadRegistry();
+
+        this.database = new Database();
+        this.database.init();
 
         this.setPlayerDataRepository();
         this.playerDataManager = new PlayerDataManager();

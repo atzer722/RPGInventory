@@ -20,7 +20,7 @@ public final class PlayerDataManager {
     }
 
     public @Nullable PlayerData getPlayerData(Player player) {
-        Optional<PlayerData> playerData = getPlayerDataRepository().findById(player.getUniqueId());
+        Optional<PlayerData> playerData = getPlayerDataRepository().findById(player.getUniqueId()).join();
 
         if (playerData.isEmpty()) {
             RPGInventory.getInstance().getErrorHandler().handleNoPlayerDataError(player);
@@ -31,7 +31,7 @@ public final class PlayerDataManager {
     }
 
     public void playerJoinEventHandler(Player player) {
-        if (getPlayerDataRepository().findById(player.getUniqueId()).isEmpty()) {
+        if (getPlayerDataRepository().findById(player.getUniqueId()).join().isEmpty()) {
             this.playerFirstJoinEventHandler(player);
         }
         this.applyBestArmor(player); // gère les deux cas
