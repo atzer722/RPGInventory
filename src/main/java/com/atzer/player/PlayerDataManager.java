@@ -5,8 +5,15 @@ import com.atzer.RPGInventory;
 import com.atzer.armor.ArmorPiece;
 import com.atzer.armor.ArmorType;
 import com.atzer.armor.ArmorZone;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -41,25 +48,42 @@ public final class PlayerDataManager {
 
                     Bukkit.getScheduler().runTask(RPGInventory.getInstance(), () -> {
                         cache.put(player.getUniqueId(), data);
-                        applyBestArmor(player);
+                        this.updateArmorForLocation(player, player.getLocation());
                     });
                 });
     }
 
-    // Quand le joueur change de zone dans le menu
+    // When the player equip a zone.
     public void onZoneSelected(Player player, int zoneId) {
         PlayerData updated = new PlayerData(player.getUniqueId(), zoneId);
-        cache.put(player.getUniqueId(), updated); // immédiat
-        getPlayerDataRepository().update(updated); // fire-and-forget async
-        applyBestArmor(player);
+        cache.put(player.getUniqueId(), updated);
+        getPlayerDataRepository().update(updated);
+        this.updateArmorForLocation(player, player.getLocation());
     }
 
     public void playerPermissionChangeEventHandler(Player player) {
-        this.applyBestArmor(player); // pas besoin de toucher PlayerData, la zone ne change pas
+        this.updateArmorForLocation(player, player.getLocation());
     }
 
     public void playerQuitEventHandler(Player player) {
         cache.remove(player.getUniqueId());
+    }
+
+    public void updateArmorForLocation(Player player, Location location) {
+        if (this.canEquipArmorFromLocation(player, location)) {
+            this.unequipArmor(player);
+        } else {
+            this.applyBestArmor(player);
+        }
+    }
+
+    public boolean canEquipArmorFromLocation(Player player, Location location) {
+        RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+        RegionQuery query = container.createQuery();
+        LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
+
+        return query.getApplicableRegions(BukkitAdapter.adapt(location))
+                .testState(localPlayer, RPGInventory.getInstance().getArmorDisabledFlag());
     }
 
     public @Nullable ArmorPiece getHighestUnlockedTier(Player player, ArmorType type, ArmorZone zone) {
@@ -72,7 +96,7 @@ public final class PlayerDataManager {
     }
 
     public void equipCurrentZone(Player player) {
-        this.applyBestArmor(player);
+        this.updateArmorForLocation(player,  player.getLocation());
     }
 
     private void applyBestArmor(Player player) {
@@ -133,6 +157,13 @@ public final class PlayerDataManager {
                     .findFirst().ifPresent(best -> equipPiece(player, best));
 
         }
+    }
+
+    private void unequipArmor(Player player) {
+        player.getInventory().setHelmet(null);
+        player.getInventory().setChestplate(null);
+        player.getInventory().setLeggings(null);
+        player.getInventory().setBoots(null);
     }
 
     private void unequipSlot(Player player, ArmorType type) {
