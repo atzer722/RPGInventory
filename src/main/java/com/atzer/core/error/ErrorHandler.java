@@ -6,6 +6,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public final class ErrorHandler {
@@ -33,5 +34,10 @@ public final class ErrorHandler {
         RPGInventory.getInstance().getLogger().severe("SQL error on: " + sql);
         RPGInventory.getInstance().getLogger().severe(e.getMessage());
         throw new RuntimeException(e);
+    }
+
+    public void handleIOException(IOException e) {
+        RPGInventory.getInstance().getLogger().severe("IO error on: " + e.getMessage());
+        e.printStackTrace();
     }
 }

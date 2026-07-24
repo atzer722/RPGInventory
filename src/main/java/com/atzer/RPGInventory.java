@@ -10,12 +10,13 @@ import com.atzer.inventory.command.RPGInventoryCommand;
 import com.atzer.inventory.listener.InventoryClickListener;
 import com.atzer.player.PlayerData;
 import com.atzer.player.PlayerDataManager;
-import com.atzer.player.listener.PlayerDeathListener;
-import com.atzer.player.listener.PlayerJoinListener;
-import com.atzer.player.listener.PlayerSpawnListener;
+import com.atzer.player.listener.*;
 import com.atzer.player.repositories.PlayerDataRepositorySql;
 import com.atzer.player.repositories.PlayerDataRepositoryYaml;
 import com.atzer.reload.command.ReloadCommand;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import lombok.Getter;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
@@ -46,6 +47,8 @@ public final class RPGInventory extends JavaPlugin {
     private LuckPerms luckPermsApi;
     private ItemStackUtils itemStackUtils;
 
+    private StateFlag armorDisabledFlag;
+
     @Override
     public void onEnable() {
         instance = this;
@@ -64,6 +67,10 @@ public final class RPGInventory extends JavaPlugin {
         this.setPlayerDataRepository();
         this.playerDataManager = new PlayerDataManager();
         this.itemStackUtils = new ItemStackUtils();
+
+        FlagRegistry flagRegistry = WorldGuard.getInstance().getFlagRegistry();
+        this.armorDisabledFlag = new StateFlag("rpginventory-disabled", false);
+        flagRegistry.register(armorDisabledFlag);
 
         this.saveDefaultConfig();
 
@@ -86,6 +93,8 @@ public final class RPGInventory extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerDeathListener(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerSpawnListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerQuitListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(), this);
 
         this.getLogger().info("Plugin RPGInventory enabled!");
     }
