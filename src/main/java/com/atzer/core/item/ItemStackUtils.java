@@ -1,5 +1,6 @@
 package com.atzer.core.item;
 
+import com.atzer.RPGInventory;
 import dev.lone.itemsadder.api.CustomStack;
 import lombok.NoArgsConstructor;
 import net.Indyuce.mmoitems.MMOItems;
@@ -24,15 +25,19 @@ public final class ItemStackUtils {
             return ItemStack.of(material);
         }
 
-        if (CustomStack.isInRegistry(s)) {
-            return CustomStack.getInstance(s).getItemStack();
+        if (RPGInventory.getInstance().getPluginConfig().getUseItemsadder()) {
+            if (CustomStack.isInRegistry(s)) {
+                return CustomStack.getInstance(s).getItemStack();
+            }
         }
 
-        String[] sArray = s.split(":");
-        if (sArray.length == 2) {
-            ItemStack stack = MMOItems.plugin.getItem(sArray[0], sArray[1]);
-            if (stack != null) {
-                return stack;
+        if (RPGInventory.getInstance().getPluginConfig().getUseMmoitems()) {
+            String[] sArray = s.split(":");
+            if (sArray.length == 2) {
+                ItemStack stack = MMOItems.plugin.getItem(sArray[0], sArray[1]);
+                if (stack != null) {
+                    return stack;
+                }
             }
         }
 

@@ -68,9 +68,11 @@ public final class RPGInventory extends JavaPlugin {
         this.playerDataManager = new PlayerDataManager();
         this.itemStackUtils = new ItemStackUtils();
 
-        FlagRegistry flagRegistry = WorldGuard.getInstance().getFlagRegistry();
-        this.armorDisabledFlag = new StateFlag("rpginventory-disabled", false);
-        flagRegistry.register(armorDisabledFlag);
+        if (this.pluginConfig.getUseWorldguard()) {
+            FlagRegistry flagRegistry = WorldGuard.getInstance().getFlagRegistry();
+            this.armorDisabledFlag = new StateFlag("rpginventory-disabled", false);
+            flagRegistry.register(armorDisabledFlag);
+        }
 
         this.saveDefaultConfig();
 

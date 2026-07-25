@@ -78,6 +78,8 @@ public final class PlayerDataManager {
     }
 
     public boolean canEquipArmorFromLocation(Player player, Location location) {
+        if (!RPGInventory.getInstance().getPluginConfig().getUseWorldguard()) return true; // If WorldGuard is not enabled, always return true.
+
         RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         RegionQuery query = container.createQuery();
         LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);

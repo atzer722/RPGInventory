@@ -12,6 +12,10 @@
 
 # For any issues, please open an issue on GitHub (https://github.com/atzer722/RPGInventory) or send a message on Discord (atzer).
 
+use_worldguard: true # Use WorldGuard for the flag usage (rpginventory-disabled).
+use_itemsadder: true # You can use ItemsAdder items on the menu.
+use_mmoitems: true # You can use MMoItems items on the menu.
+
 menu:
   command: "dm open main_menu {player}" # The command that will be used to open your menu.
   inventory_texture: "rpginventory:gui_background" # ItemsAdder texture that will be applied to the gui.
