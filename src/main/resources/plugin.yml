@@ -1,12 +1,13 @@
 name: RPGInventory
 main: com.atzer.RPGInventory
-version: "2.4"
+version: "2.5"
 api-version: "1.21"
 load: POSTWORLD
 prefix: RPGInventory
 author: Atzer
 description: "This plugin transform the main inventory into a rpg inventory."
-depend: [ItemsAdder, LuckPerms, MMOItems, WorldGuard]
+depend: [LuckPerms]
+soft-depend: [ItemsAdder, MMOItems, WorldGuard]
 
 commands:
   inventory:

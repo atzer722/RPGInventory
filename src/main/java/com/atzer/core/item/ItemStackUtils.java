@@ -1,19 +1,20 @@
 package com.atzer.core.item;
 
+import com.atzer.RPGInventory;
 import dev.lone.itemsadder.api.CustomStack;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import net.Indyuce.mmoitems.MMOItems;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.Nullable;
-import org.jspecify.annotations.NonNull;
 
 @NoArgsConstructor
 public final class ItemStackUtils {
 
-    public @NonNull ItemStack stringToItemStack(String s) {
+    public @NonNull ItemStack stringToItemStack(@NonNull String s) {
         if (s.startsWith("minecraft:")) {
             Material material = Material.getMaterial(s.substring(10).toUpperCase());
 
@@ -24,15 +25,19 @@ public final class ItemStackUtils {
             return ItemStack.of(material);
         }
 
-        if (CustomStack.isInRegistry(s)) {
-            return CustomStack.getInstance(s).getItemStack();
+        if (RPGInventory.getInstance().getPluginConfig().getUseItemsadder()) {
+            if (CustomStack.isInRegistry(s)) {
+                return CustomStack.getInstance(s).getItemStack();
+            }
         }
 
-        String[] sArray = s.split(":");
-        if (sArray.length == 2) {
-            ItemStack stack = MMOItems.plugin.getItem(sArray[0], sArray[1]);
-            if (stack != null) {
-                return stack;
+        if (RPGInventory.getInstance().getPluginConfig().getUseMmoitems()) {
+            String[] sArray = s.split(":");
+            if (sArray.length == 2) {
+                ItemStack stack = MMOItems.plugin.getItem(sArray[0], sArray[1]);
+                if (stack != null) {
+                    return stack;
+                }
             }
         }
 

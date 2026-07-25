@@ -1,5 +1,6 @@
 package com.atzer;
 
+import com.atzer.armor.ArmorPiece;
 import com.atzer.armor.ArmorZoneRegistry;
 import com.atzer.core.Database;
 import com.atzer.core.config.ArmorConfig;
@@ -18,11 +19,15 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
-import net.luckperms.api.event.node.NodeMutateEvent;
+import net.luckperms.api.event.node.NodeAddEvent;
+import net.luckperms.api.event.node.NodeRemoveEvent;
 import net.luckperms.api.model.user.User;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -68,22 +73,50 @@ public final class RPGInventory extends JavaPlugin {
         this.playerDataManager = new PlayerDataManager();
         this.itemStackUtils = new ItemStackUtils();
 
-        FlagRegistry flagRegistry = WorldGuard.getInstance().getFlagRegistry();
-        this.armorDisabledFlag = new StateFlag("rpginventory-disabled", false);
-        flagRegistry.register(armorDisabledFlag);
+        if (this.pluginConfig.getUseWorldguard()) {
+            FlagRegistry flagRegistry = WorldGuard.getInstance().getFlagRegistry();
+            this.armorDisabledFlag = new StateFlag("rpginventory-disabled", false);
+            flagRegistry.register(armorDisabledFlag);
+        }
 
         this.saveDefaultConfig();
 
         luckPermsApi = LuckPermsProvider.get();
 
-        luckPermsApi.getEventBus().subscribe(this, NodeMutateEvent.class, event -> {
+        luckPermsApi.getEventBus().subscribe(this, NodeAddEvent.class, event -> {
             if (!(event.getTarget() instanceof User user)) return;
+
+            ArmorPiece piece = armorZoneRegistry.getArmorPieceFromPermissionId(event.getNode().getKey());
+            if (piece == null) return;
 
             Player player = Bukkit.getPlayer(user.getUniqueId());
             if (player == null || !player.isOnline()) return;
 
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 playerDataManager.playerPermissionChangeEventHandler(player);
+                player.sendMessage(
+                        Component.text("✦ New piece unlocked : ").color(NamedTextColor.YELLOW)
+                                .append(piece.toItemStack().displayName().color(NamedTextColor.GOLD))
+                );
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+            }, 1L);
+        });
+
+        luckPermsApi.getEventBus().subscribe(this, NodeRemoveEvent.class, event -> {
+            if (!(event.getTarget() instanceof User user)) return;
+
+            ArmorPiece piece = this.armorZoneRegistry.getArmorPieceFromPermissionId(event.getNode().getKey());
+            if (piece == null) return;
+
+            Player player = Bukkit.getPlayer(user.getUniqueId());
+            if (player == null || !player.isOnline()) return;
+
+            Bukkit.getScheduler().runTaskLater(this, () -> {
+                playerDataManager.playerPermissionChangeEventHandler(player);
+                player.sendMessage(
+                        Component.text("✦ The piece ").color(NamedTextColor.YELLOW)
+                                .append(piece.toItemStack().displayName().color(NamedTextColor.GOLD))
+                );
             }, 1L);
         });
 

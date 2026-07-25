@@ -14,6 +14,18 @@ public final class Config {
         return RPGInventory.getInstance().getConfig();
     }
 
+    public boolean getUseWorldguard() {
+        return get().getBoolean("use_worldguard", true);
+    }
+
+    public boolean getUseItemsadder() {
+        return get().getBoolean("use_itemsadder", true);
+    }
+
+    public boolean getUseMmoitems() {
+        return get().getBoolean("use_mmoitems", true);
+    }
+
     public String getMenuCommand() {
         return get().getString("menu.command", "menu");
     }
@@ -81,6 +93,18 @@ public final class Config {
 
     private Map<String, Object> checkConfig() {
         Map<String, Object> map = new HashMap<>();
+
+        if (!get().isSet("use_worldguard")) {
+            map.put("use_worldguard", true);
+        }
+
+        if (!get().isSet("use_itemsadder")) {
+            map.put("use_itemsadder", true);
+        }
+
+        if (!get().isSet("use_mmoitems")) {
+            map.put("use_mmoitems", true);
+        }
 
         if (!get().isSet("menu.command")) {
             map.put("menu.command", "dm open main_menu {player}");
