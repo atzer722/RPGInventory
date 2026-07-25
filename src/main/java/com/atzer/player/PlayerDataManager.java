@@ -12,6 +12,8 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import lombok.RequiredArgsConstructor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -72,8 +74,10 @@ public final class PlayerDataManager {
     public void updateArmorForLocation(Player player, Location location) {
         if (this.canEquipArmorFromLocation(player, location)) {
             this.unequipArmor(player);
+            player.sendMessage(Component.text("You are no longer equipped armor.").color(NamedTextColor.YELLOW));
         } else {
             this.applyBestArmor(player);
+            player.sendMessage(Component.text("Your armor is now equipped.").color(NamedTextColor.YELLOW));
         }
     }
 
@@ -180,7 +184,6 @@ public final class PlayerDataManager {
 
     private void equipPiece(Player player, ArmorPiece piece) {
         ItemStack item = piece.toItemStack();
-        if (item == null) return;
         switch (piece.type()) {
             case HELMET     -> player.getInventory().setHelmet(item);
             case CHESTPLATE -> player.getInventory().setChestplate(item);

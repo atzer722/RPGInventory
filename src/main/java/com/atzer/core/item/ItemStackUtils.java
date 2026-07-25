@@ -3,18 +3,18 @@ package com.atzer.core.item;
 import com.atzer.RPGInventory;
 import dev.lone.itemsadder.api.CustomStack;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import net.Indyuce.mmoitems.MMOItems;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.Nullable;
-import org.jspecify.annotations.NonNull;
 
 @NoArgsConstructor
 public final class ItemStackUtils {
 
-    public @NonNull ItemStack stringToItemStack(String s) {
+    public @NonNull ItemStack stringToItemStack(@NonNull String s) {
         if (s.startsWith("minecraft:")) {
             Material material = Material.getMaterial(s.substring(10).toUpperCase());
 
